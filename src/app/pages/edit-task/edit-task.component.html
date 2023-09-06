@@ -1,0 +1,70 @@
+<div class="editTaskComponent flex justify-center items-center w-full h-full">
+
+  <div class="popUpBox w-full px-2 py-10 max-w-lg bg-white rounded-md sm:p-10">
+
+    <h1 class="title mb-5">
+      Edit the task.
+    </h1>
+
+    <form #editedTaskForm="ngForm" (ngSubmit)="editTask(editedTaskForm)">
+
+      <div class="inputField mb-3">
+
+        <input
+          type="text" autofocus
+          name="editedTaskName" [(ngModel)]="inputValue" #inputControlState="ngModel"
+          class="block w-full outline-none p-2 bg-customizeLight text-base text-customizeDarkGreen rounded-lg border-2 focus:border-customizeGreen"
+          placeholder="Write task title..."
+          required minlength="1" maxlength="50" checkWhiteSpace
+        >
+
+        <div class="errorMessages" *ngIf="inputControlState.invalid && (inputControlState.dirty || inputControlState.touched || buttonClicked)">
+
+          <span *ngIf="inputControlState.errors?.['required']">
+            The edited Name of the task is required.
+          </span>
+
+          <span *ngIf="inputControlState.errors?.['minlength']">
+            The edited Name of the task must be at least 1 characters long.
+          </span>
+
+          <span *ngIf="inputControlState.errors?.['maxlength']">
+            The edited Name of the task must be at max 50 characters long.
+          </span>
+
+          <span *ngIf="inputControlState.errors?.['whiteSpace']">
+            Input cannot consist of only spaces.
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="buttons flex justify-end items-center">
+
+        <button
+          type="button"
+          class="p-2 text-base text-white bg-customizeDarkGreen rounded-lg outline-0"
+          routerLink="/lists/{{ listId }}"
+          >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="p-2 ml-2 text-base text-white bg-customizeGreen rounded-lg outline-0" [class.invalidInputState]="inputControlState.invalid"
+        >
+          Edit
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- IMPO: If There us no task add a text like:
+'No Tasks here add one..' -->

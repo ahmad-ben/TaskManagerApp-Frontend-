@@ -1,0 +1,107 @@
+<div class="registerComponent flex justify-center items-center w-full h-full">
+
+  <div class="registerBox w-full max-w-lg bg-white rounded-md flex flex-col items-center justify-center py-5 md:px-6 md:py-10">
+
+    <header class="flex items-center mb-6 text-2xl font-semibold text-black">
+      <img class="w-8 h-8 mr-2" src="assets/icons/noteIcon.svg" alt="logo">
+      Note It Now
+    </header>
+
+    <div class="w-full p-4 space-y-4 rounded-lg shadow sm:p-6 sm:max-w-md md:space-y-6">
+
+      <h1 class="text-xl font-bold leading-tight tracking-tight text-black md:text-2xl">
+        Add new account.
+      </h1>
+
+      <form class="space-y-4 md:space-y-6" [formGroup]="signUpForm" (ngSubmit)="onRegisterButtonClicked()">
+
+        <div>
+          <label for="email" class="block text-sm font-medium text-customizeDarkGreen mb-2">Your email</label>
+          <input
+            #emailInput
+            type="email" name="email" id="email" autofocus
+            class="block w-full p-2.5 bg-customizeLight border border-transparent rounded-lg text-black outline-0 sm:text-sm focus:border-customizeGreen"
+            placeholder="name@company.com"
+            formControlName="email"
+          >
+          <div
+            class="errorMessages"
+            *ngIf="signUpForm.get('email')?.errors && (
+              signUpForm.get('email')?.touched || buttonClicked
+            )"
+          >
+
+            <span *ngIf="signUpForm.get('email')?.hasError('required')">
+              Email is required.
+            </span>
+
+            <span *ngIf="signUpForm.get('email')?.hasError('email')">
+              Email is not valid.
+            </span>
+
+            <span *ngIf="signUpForm.get('email')?.hasError('minlength')">
+              Email is too short.
+            </span>
+
+            <span *ngIf="signUpForm.get('email')?.hasError('maxlength')">
+              Email is too long.
+            </span>
+
+          </div>
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-medium text-customizeDarkGreen mb-2">Password</label>
+          <input
+            #passwordInput
+            type="password" name="password" id="password"
+            placeholder="••••••••"
+            class="block w-full p-2.5 bg-customizeLight border border-transparent rounded-lg text-black outline-0 sm:text-sm focus:border-customizeGreen"
+            formControlName="password"
+          >
+          <div
+            class="errorMessages"
+            *ngIf="signUpForm.get('password')?.errors && (
+              signUpForm.get('password')?.touched || buttonClicked
+            )"
+          >
+
+            <span *ngIf="signUpForm.get('password')?.hasError('required')">
+              Password is required.
+            </span>
+
+            <span *ngIf="signUpForm.get('password')?.hasError('minlength')">
+              Password is too short.
+            </span>
+
+            <span *ngIf="signUpForm.get('password')?.hasError('maxlength')">
+              Password is too long.
+            </span>
+
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full px-5 py-2.5 rounded-lg text-base text-white font-medium text-center bg-customizeGreen" [class.invalidInputState]="signUpForm.invalid"
+        >Sign up</button>
+
+      </form>
+
+      <p class="text-sm font-light text-customizeDarkGreen">
+        You already have an account? <a routerLink="/login" class="font-medium text-customizeGreen hover:underline">Sign in</a>
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ============== -->
+<!--
+
+
+-->

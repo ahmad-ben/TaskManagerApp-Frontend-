@@ -1,0 +1,74 @@
+<div class="newTaskComponent flex justify-center items-center w-full h-full">
+
+  <div class="popUpBox w-full px-2 py-10 max-w-lg bg-white rounded-md sm:p-10">
+
+    <h1 class="title mb-5">
+      Create a new task.
+    </h1>
+
+    <form #newTaskForm="ngForm" (ngSubmit)="createTask(newTaskForm)">
+
+      <div class="inputField mb-3">
+        <input
+          type="text" autofocus
+          name="newTaskName" [(ngModel)]="inputValue" #inputControlState="ngModel"
+          class="block w-full outline-none p-2 bg-customizeLight text-base text-customizeDarkGreen rounded-lg border-2 focus:border-customizeGreen"
+          placeholder="Add task title..."
+          required  minlength="1" maxlength="50" checkWhiteSpace
+        >
+
+        <div class="errorMessages" *ngIf="inputControlState.invalid && (inputControlState.dirty || inputControlState.touched || buttonClicked)">
+
+          <span *ngIf="inputControlState.errors?.['required']">
+            Name of the new task is required.
+          </span>
+
+          <span *ngIf="inputControlState.errors?.['minlength']">
+            Name of the new task must be at least 1 characters long.
+          </span>
+
+          <span *ngIf="inputControlState.errors?.['maxlength']">
+            Name of the new task must be at max 50 characters long.
+          </span>
+
+          <span *ngIf="inputControlState.errors?.['whiteSpace']">
+            Input cannot consist of only spaces.
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="buttons flex justify-end items-center">
+
+        <button
+          type="button"
+          class="p-2 text-base text-white bg-customizeDarkGreen rounded-lg outline-0"
+          routerLink="/"
+          >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="p-2 ml-2 text-base text-white bg-customizeGreen rounded-lg outline-0" [class.invalidInputState]="inputControlState.invalid"
+        >
+          Create
+        </button>
+
+      </div>
+
+    </form>
+
+</div>
+
+
+
+<!--IMPO: The Input style Here and in newList should be the same and we can collect it  -->
+
+
+
+
+
+
+
