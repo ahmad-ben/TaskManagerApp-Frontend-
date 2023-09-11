@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'ngx-toastr/toastr';
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Nunito:wght@400;700&display=swap');
 
 $turquoise: hsl(175, 69%, 57%);
@@ -13,7 +14,6 @@ $light-green: hsl(149, 91%, 62%);
 $dark-green: hsl(168, 100%, 20%);  //#006652 , rgb(0, 102, 82)
 
 $light: hsl(0, 0%, 97%);
-
 
 body{
   font-family: "Nunito", sans-serif;

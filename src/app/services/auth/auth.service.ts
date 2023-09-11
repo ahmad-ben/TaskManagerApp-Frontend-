@@ -8,15 +8,16 @@ import { WebRequestService } from '../web/web-request.service';
   providedIn: 'root'
 })
 export class AuthService {
-
   webReqService = inject(WebRequestService);
   router = inject(Router);
   http = inject(HttpClient);
 
-  private setLoginInfo(userId: string, JWTToken: string, sessionToken: string){
-    localStorage.setItem('userId', userId);
-    localStorage.setItem('accessToken', JWTToken);
-    localStorage.setItem('refreshToken', sessionToken);
+  private setLoginInfo(userId: string | null, JWTToken: string | null, sessionToken: string | null){
+    if(userId && JWTToken && sessionToken){
+      localStorage.setItem('userId', userId);
+      localStorage.setItem('accessToken', JWTToken);
+      localStorage.setItem('refreshToken', sessionToken);
+    }
   }
 
   deleteLoginInfo(){
@@ -32,11 +33,11 @@ export class AuthService {
         tap((res: HttpResponse<any>) => {
           this.setLoginInfo(
             res.body._id,
-            res.headers.get('X-access-token') as string,
-            res.headers.get('X-refresh-token') as string
+            res.headers.get('X-access-token'),
+            res.headers.get('X-refresh-token')
           );
         })
-      );
+      );//=> STOP Problem Here
   }
 
   register(email: string, password: string){
@@ -46,12 +47,11 @@ export class AuthService {
         tap((res: HttpResponse<any>) => {
           this.setLoginInfo(
             res.body._id,
-            res.headers.get('X-access-token') as string,
-            res.headers.get('X-refresh-token') as string
+            res.headers.get('X-access-token'),
+            res.headers.get('X-refresh-token')
           );
         })
-
-      );
+      );//=> STOP Problem Here
   }
 
   logout(){
@@ -64,15 +64,17 @@ export class AuthService {
   }
 
   setAccessToken(accessToken: string){
-    return localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('accessToken', accessToken);
   }
 
-  getRefreshToken(){
-    return localStorage.getItem('refreshToken') as string;
+  getRefreshToken(): string{
+    const refreshTokenFromLocalStorage = localStorage.getItem('refreshToken');
+    return refreshTokenFromLocalStorage ? refreshTokenFromLocalStorage : '';
   }
 
-  getUserId(){
-    return localStorage.getItem('userId') as string;
+  getUserId(): string{
+    const userIdFromLocalStorage = localStorage.getItem('userId');
+    return userIdFromLocalStorage ? userIdFromLocalStorage : '';
   }
 
   getNewAccessToken(){
@@ -88,7 +90,9 @@ export class AuthService {
         },
     ).pipe(
       tap((res: HttpResponse<any>) => {
-        this.setAccessToken(res.headers.get('X-access-token') as string);
+        const accessToken = res.headers.get('X-access-token');
+        if(accessToken) return this.setAccessToken(accessToken);
+        this.setAccessToken('');
       })
     )
   }

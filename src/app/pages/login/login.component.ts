@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { HttpResponse } from '@angular/common/http';
-import { Component, OnInit, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ErrorBodyType } from 'src/app/shared/types/errorBodyResponse';
 import { AuthService } from './../../services/auth/auth.service';
 
 @Component({
@@ -17,12 +19,16 @@ import { AuthService } from './../../services/auth/auth.service';
   styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
   buttonClicked: boolean = false;
+  errorMessage: string = '';
+
+ @ViewChild('emailInput', { read: ElementRef }) emailInput?:ElementRef<HTMLInputElement>;
 
   router = inject(Router);
   fb = inject(FormBuilder);
   authService = inject(AuthService);
+  toastr = inject(ToastrService);
 
   signInForm = this.fb.group({
     email:[
@@ -44,13 +50,15 @@ export class LoginComponent implements OnInit {
     ],
   })
 
-  ngOnInit(){
-    this.authService.deleteLoginInfo();
+  ngOnInit(){ this.authService.deleteLoginInfo(); }
+
+  ngAfterViewInit(){
+    this.emailInput?.nativeElement.focus();
   }
 
   onLoginButtonClicked(){
     this.buttonClicked = true;
-    if(this.signInForm.invalid) return;
+    // if(this.signInForm.invalid) return;
 
     this.authService.login(
       this.signInForm.value.email!,
@@ -58,7 +66,15 @@ export class LoginComponent implements OnInit {
     )
       .subscribe({
         next: (res: HttpResponse<any>) => {
+          console.log('login next works', res);
+
+          this.toastr.success( 'Login Success!', 'Welcome.');
           this.router.navigateByUrl('');
+        },
+        error: (error: ErrorBodyType) => {
+          console.log('login error works', error);
+
+          this.errorMessage = error.message;
         }
       });
   }

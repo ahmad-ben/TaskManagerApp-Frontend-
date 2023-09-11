@@ -11,9 +11,9 @@
       <div class="inputField mb-3">
 
         <input
-          type="text" autofocus
+          type="text"
           name="editedListName" [(ngModel)]="inputValue" #inputControlState="ngModel"
-          class="block w-full outline-none p-2 bg-customizeLight text-base text-customizeDarkGreen rounded-lg border-2 focus:border-customizeGreen"
+          class="block w-full outline-none p-2 bg-customizeLight text-base text-customizeDarkGreen rounded-lg border-2 focus:border-customizeGreen" #input
           placeholder="Write list title..."
           required minlength="1" maxlength="50" checkWhiteSpace
         >
@@ -58,6 +58,8 @@
         </button>
 
       </div>
+
+      <div class="errorMessages text-right" *ngIf="errorMessage && inputControlState.invalid" > {{ errorMessage }} </div>
 
     </form>
 

@@ -11,7 +11,7 @@
       <div class="inputField mb-3">
 
         <input
-          type="text" autofocus
+          type="text"
           name="newListName" [(ngModel)]="inputValue" #inputControlState="ngModel"
           class="block w-full outline-none p-2 bg-customizeLight text-base text-customizeDarkGreen rounded-lg border-2 focus:border-customizeGreen"
           placeholder="Write list title..."
@@ -58,6 +58,8 @@
         </button>
 
       </div>
+
+      <div class="errorMessages text-right" *ngIf="errorMessage && inputControlState.invalid" > {{ errorMessage }} </div>
 
     </form>
 

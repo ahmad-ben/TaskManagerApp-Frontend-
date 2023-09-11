@@ -3,9 +3,3 @@ export interface ListType {
   _id: string,
   _userId: string
 }
-
-
-
-
-
-
