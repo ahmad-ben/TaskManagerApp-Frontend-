@@ -56,7 +56,7 @@ export class EditTaskComponent implements OnInit, AfterViewInit {
   editTask(editedTaskForm: NgForm){
 
     this.buttonClicked = true;
-    // if(editedTaskForm.invalid || !this.taskObj) return;
+    if(editedTaskForm.invalid || !this.taskObj) return;
     this.spinner.show('editTask');
     this.workingSpinners.spinnerStartsWorking('editTask');
 
@@ -81,34 +81,8 @@ export class EditTaskComponent implements OnInit, AfterViewInit {
             return this.toastr.error(error.message, 'Error');
           }
           return this.errorMessage = error.message;
-        } //=> IMPO: Repeat a lot create a function for.
+        }
       });
-    // .subscribe({
-    //   next: (res) => {
-    //     this.taskObj = res;
-    //   },
-    //   error: (error: ErrorBodyType) => {
-    //     if(error.shouldNavigate) {
-    //       this.router.navigateByUrl('');
-    //       return this.toastr.error(error.message, 'Error');
-    //     }
-    //     return this.errorMessage = error.message;
-    //   }
-    // })
-
-    // this.taskService.editTask(this.taskObj!, this.inputValue)//=> Remove !
-    //   .subscribe({
-    //     next: (res) => {
-    //       this.router.navigateByUrl(`lists/${this.listId}`)
-    //     },
-    //     error: (error: ErrorBodyType) => {
-    //       if(error.shouldNavigate) {
-    //         this.router.navigateByUrl('');
-    //         return this.toastr.error(error.message, 'Error');
-    //       }
-    //       return this.errorMessage = error.message;
-    //     } //=> IMPO: Repeat a lot create a function for.
-    //   });
 
   }
 

@@ -44,7 +44,7 @@ export class EditListComponent implements OnInit, AfterViewInit {
   editList(editedListForm: NgForm){
 
     this.buttonClicked = true;
-    // if(editedListForm.invalid) return;//=> Return this protection step later
+    if(editedListForm.invalid) return;
 
     this.listService.editList(this.listId, this.inputValue)
       .subscribe({

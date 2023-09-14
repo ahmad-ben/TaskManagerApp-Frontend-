@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
   onRegisterButtonClicked(){
     this.buttonClicked = true;
-    // if(this.signUpForm.invalid) return;
+    if(this.signUpForm.invalid) return;
 
     this.authService.register(
       this.signUpForm.value.email!,

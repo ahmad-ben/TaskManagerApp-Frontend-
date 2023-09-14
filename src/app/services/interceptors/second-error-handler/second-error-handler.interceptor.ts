@@ -22,7 +22,7 @@ export class SecondErrorHandlerInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       tap((test) => { console.log('Tap In Second Inter', test, req); }),
 
-      catchError((httpErrorRes: HttpErrorResponse) => { //=>IMPO:  Why Should always return a token and what it does with it.
+      catchError((httpErrorRes: HttpErrorResponse) => {
         const errorBody : ErrorBodyType = httpErrorRes.error;
         console.log('SECOND 2- ERROR INTERCEPTOR WORKS THE HTTP_ERROR_RES: ', httpErrorRes, '--------', httpErrorRes.status);
 
@@ -42,7 +42,7 @@ export class SecondErrorHandlerInterceptor implements HttpInterceptor {
           return EMPTY;
         }
 
-      }) //=> IMPO: Do The Case .. other statement approach
+      })
     )
   }
 

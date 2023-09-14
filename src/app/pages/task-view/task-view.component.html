@@ -23,7 +23,7 @@
           </a>
         </ul>
 
-        <button class="bg-customizeGreen p-2 rounded-lg cursor-pointer text-white disabled:p-11 mr-4 md:mr-6 lg:mr-8" routerLink="/newList">
+        <button class="bg-customizeGreen p-2 rounded-lg cursor-pointer text-white mr-4 md:mr-6 lg:mr-8" routerLink="/newList">
           + New List
         </button>
 
@@ -100,7 +100,7 @@
           </header>
 
 
-          <ul class="tasksMenu flex flex-col gap-2 grow disabled:p-10 overflow-y-auto">
+          <ul class="tasksMenu flex flex-col gap-2 grow overflow-y-auto">
             <li #taskLi [class.completed]="taskObj.completed" *ngFor="let taskObj of tasksArray" class="taskDescription bg-white py-2 px-2.5 rounded-md flex items-center gap-2 lg:py-4 lg:px-5">
               <p class="grow" (click)="taskClicked(taskObj)">{{ taskObj.title }}</p>
               <img class="taskIcon p-1 border border-customizeGreen rounded w-8 h-8" [class.hiddenTaskIcon]="taskObj.completed" [routerLink]="'/lists/'+ listId + '/tasks/' + taskObj._id + '/editTask'" src="assets/icons/editIcon.svg" alt="trashIcon">

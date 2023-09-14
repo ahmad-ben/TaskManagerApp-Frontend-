@@ -44,7 +44,7 @@ export class NewTaskComponent implements OnInit, AfterViewInit  {
   createTask(newTaskForm: NgForm){
 
     this.buttonClicked = true;
-    // if(newTaskForm.invalid) return;
+    if(newTaskForm.invalid) return;
 
     this.taskService.createTask(this.listId, this.inputValue)
       .subscribe({

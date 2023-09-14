@@ -9,7 +9,7 @@ import { whiteSpaceValidator } from 'src/app/shared/functions/whiteSpaceValidato
     useExisting: CheckWhiteSpaceDirective,
     multi: true
   }],
-  standalone: true, //=> how can i use the directive.
+  standalone: true,
 })
 
 export class CheckWhiteSpaceDirective implements Validator {

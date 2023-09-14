@@ -31,13 +31,13 @@ export const appConfig: ApplicationConfig = {
       ListsResolveService
     ),
 
-    provideHttpClient( withInterceptorsFromDi(), ), //( withInterceptors([ ApiInterceptor 'ARRAY_OF_APP_INTERCEPTORS']) ), //=> IMPO: Learn More About This Approach and about interceptor en general
+    provideHttpClient( withInterceptorsFromDi(), ),
 
     [
       { provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true },
       { provide: HTTP_INTERCEPTORS, useClass: SecondErrorHandlerInterceptor, multi: true },
       { provide: HTTP_INTERCEPTORS, useClass: FirstErrorHandlerInterceptor, multi: true },
-    ], //=> IMPO: what all of this...
+    ],
 
     provideRouter(routes)
 
@@ -46,29 +46,3 @@ export const appConfig: ApplicationConfig = {
 
 
 };
-
-
-
-// import { provideAnimations } from '@angular/platform-browser/animations';
-// import { AppComponent } from './src/app.component';
-
-// import { provideToastr } from 'ngx-toastr';
-
-// bootstrapApplication(AppComponent, {
-//   providers: [
-//     provideAnimations(), // required animations providers
-//     provideToastr(), // Toastr providers
-//   ]
-// });
-
-// bootstrapApplication(AppComponent, {
-//   providers: [
-//       provideHttpClient(
-//           withInterceptorsFromDi(),
-//       ),
-//       {
-//           provide: HTTP_INTERCEPTORS,
-//           useClass: AuthInterceptor,
-//           multi: true,
-//       },
-//    ] });

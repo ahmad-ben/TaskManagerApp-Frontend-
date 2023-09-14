@@ -40,11 +40,8 @@ export const listsResolver: ResolveFn<any> =
         }),
         finalize(() => {
           console.log('finalize here');
-          // setTimeout(() => {
             spinner.hide('getLists');
             workingSpinners.spinnerFinishesWorking('getLists');
-          // }, 10000);
-
         })
       )
 
@@ -93,37 +90,6 @@ export const listsAndTasksResolver: ResolveFn<Observable<(ListType[] | TaskType[
       })
     )
   }
-
-  // export const editListResolver: ResolveFn<Observable<any>> =
-  // (
-  //   route: ActivatedRouteSnapshot,
-  //   state: RouterStateSnapshot,
-  // ) => {
-  //   const taskService = inject(TaskService);
-  //   const toastr = inject(ToastrService);
-  //   const router = inject(Router);
-  //   const listId = route.params['listId'];
-  //   const arrayOfListsAndTasks : (ListType[] | TaskType[])[] = [];
-
-
-  //   return inject(ListService).getLists()
-  //   .pipe(
-  //     switchMap((listsArray: ListType[]) => {
-  //       arrayOfListsAndTasks.push(listsArray);
-  //       return taskService.getTasks(listId)
-  //     }),
-  //     map((tasksArray: TaskType[]) => {
-  //       arrayOfListsAndTasks.push(tasksArray);
-  //       console.log(arrayOfListsAndTasks);
-
-  //       return arrayOfListsAndTasks
-  //     }),
-  //     catchError((error: ErrorBodyType) => {
-  //       router.navigateByUrl('');
-  //       toastr.error(error.message);
-  //       return [];
-  //   }))
-  // }
 
 export const routes: Routes = [
   { path: '', redirectTo: 'lists', pathMatch: 'full' },

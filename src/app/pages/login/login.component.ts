@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   onLoginButtonClicked(){
     this.buttonClicked = true;
-    // if(this.signInForm.invalid) return;
+    if(this.signInForm.invalid) return;
 
     this.authService.login(
       this.signInForm.value.email!,
