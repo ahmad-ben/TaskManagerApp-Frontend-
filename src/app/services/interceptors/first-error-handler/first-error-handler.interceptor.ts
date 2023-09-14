@@ -41,7 +41,7 @@ export class FirstErrorHandlerInterceptor implements HttpInterceptor {
               switchMap(() => {
                 req = this.addAuthHeader(req);
                 console.log(req);
-                return next.handle(req); //=> STOP: How This is working 'Chat GPT'
+                return next.handle(req);
               })
             )
         }return next.handle(req);

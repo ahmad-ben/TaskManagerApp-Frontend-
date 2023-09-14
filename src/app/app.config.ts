@@ -10,6 +10,7 @@ import { routes } from './app.routes';
 import { FirstErrorHandlerInterceptor } from './services/interceptors/first-error-handler/first-error-handler.interceptor';
 import { HeadersInterceptor } from './services/interceptors/headers/headers.interceptor';
 import { SecondErrorHandlerInterceptor } from './services/interceptors/second-error-handler/second-error-handler.interceptor';
+import { ListsResolveService } from './services/resolves/lists.resolve.service';
 import { toasterPosition } from './shared/functions/toasterPosition';
 
 
@@ -26,7 +27,8 @@ export const appConfig: ApplicationConfig = {
     }),
 
     importProvidersFrom(
-      NgxSpinnerModule
+      NgxSpinnerModule,
+      ListsResolveService
     ),
 
     provideHttpClient( withInterceptorsFromDi(), ), //( withInterceptors([ ApiInterceptor 'ARRAY_OF_APP_INTERCEPTORS']) ), //=> IMPO: Learn More About This Approach and about interceptor en general

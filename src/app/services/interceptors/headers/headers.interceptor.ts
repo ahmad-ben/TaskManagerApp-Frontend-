@@ -9,15 +9,18 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { EMPTY, Observable, finalize, tap } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
+import { WorkingSpinnersService } from '../../spinners-state/working-spinner.service';
 
 @Injectable()
 export class HeadersInterceptor implements HttpInterceptor {
+  isASpinnerWorking?: boolean;
+
   authService = inject(AuthService);
   toastr = inject(ToastrService);
   spinner = inject(NgxSpinnerService);
+  workingSpinners = inject(WorkingSpinnersService);
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-
     console.log('No Connection', !navigator.onLine);
     if (!navigator.onLine) {
       this.toastr.error(
@@ -28,7 +31,22 @@ export class HeadersInterceptor implements HttpInterceptor {
       return EMPTY;
     }
 
-      this.spinner.show();
+    console.log('Header works');
+    console.log('starts here');
+
+    this.workingSpinners.arrayOfWorkingSpinners$
+      .subscribe({
+        next: ((arrayOfWorkingSpinners: string[]) => {
+          if(arrayOfWorkingSpinners.length == 0) this.isASpinnerWorking = false;
+          else this.isASpinnerWorking = true;
+        })
+      })
+
+    if(!this.isASpinnerWorking) {
+      console.log('REQUEST', req);
+      console.log('this.isASpinnerWorking', this.isASpinnerWorking);
+      this.spinner.show('primary')
+    }
 
     console.log('HEADER INTERCEPTOR WORKS 1: ', req);
 
@@ -41,7 +59,8 @@ export class HeadersInterceptor implements HttpInterceptor {
         console.log('From Header Inter', test)
       }),
       finalize(() => {
-        this.spinner.hide()
+        console.log('------------ finalize', this.isASpinnerWorking)
+        this.spinner.hide('primary');
       })
     );
 
@@ -60,24 +79,3 @@ export class HeadersInterceptor implements HttpInterceptor {
 
 }
 
-/*
-
-If We Write:
-
-export class HeadersInterceptor implements HttpInterceptor {
-
-  authService = inject(AuthService);
-
-  intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-
-    return next.handle(req).pipe(
-      ...
-    );
-
-    we can track this observable but subscribe in it how this could happen
-
-  }
-
-}
-
-*/

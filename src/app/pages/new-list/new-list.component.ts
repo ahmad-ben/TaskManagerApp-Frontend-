@@ -37,7 +37,7 @@ export class NewListComponent implements AfterViewInit {
   createList(newListForm: NgForm){
 
     this.buttonClicked = true;
-    // if(newListForm.invalid) return; //=> IMPO: Return later
+    if(newListForm.invalid) return; //=> IMPO: Return later
 
     this.listService.createList(this.inputValue)
       .subscribe({

@@ -21,7 +21,6 @@
               {{ list.title }}
             </p>
           </a>
-
         </ul>
 
         <button class="bg-customizeGreen p-2 rounded-lg cursor-pointer text-white disabled:p-11 mr-4 md:mr-6 lg:mr-8" routerLink="/newList">
@@ -57,7 +56,7 @@
 
             <div id="dropdown" [class.hidden]="!dropdownVisibility" class="dropDown z-10 bg-white divide-y divide-gray-100 rounded-lg shadow absolute w-28">
                 <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
-                  <li class="cursor-pointer" routerLink="/lists/{{ listId() }}/editList">
+                  <li class="cursor-pointer" routerLink="/lists/{{ listId }}/editList">
                     <p class="px-4 py-2 hover:bg-gray-100">Edit list</p>
                   </li>
                   <li class="cursor-pointer" (click)="deleteList()">
@@ -72,7 +71,7 @@
           <h3 class="noTaskInSelectedList grow text-xl text-center text-[#777]">There are no tasks here, click the add button to create new task.</h3>
 
 
-          <button class="bg-customizeGreen text-lg rounded-full p-2 w-10 min-w-[40px] h-10 min-h-[40px] flex justify-center items-center cursor-pointer text-white self-end" *ngIf="tasksArray && tasksArray.length == 0" routerLink="/lists/{{listId()}}/newTask">
+          <button class="bg-customizeGreen text-lg rounded-full p-2 w-10 min-w-[40px] h-10 min-h-[40px] flex justify-center items-center cursor-pointer text-white self-end" *ngIf="tasksArray && tasksArray.length == 0" routerLink="/lists/{{listId}}/newTask">
             <img class="w-[75%] h-[75%]" src="assets/icons/plusIcon.svg" alt="addIcon">
           </button>
         </div>
@@ -89,7 +88,7 @@
 
             <div id="dropdown" [class.hidden]="!dropdownVisibility" class="dropDown z-10 bg-white divide-y divide-gray-100 rounded-lg shadow absolute w-28">
                 <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
-                  <li class="cursor-pointer" routerLink="/lists/{{listId()}}/editList" >
+                  <li class="cursor-pointer" routerLink="/lists/{{listId}}/editList" >
                     <p class="px-4 py-2 hover:bg-gray-100">Edit list</p>
                   </li>
                   <li class="cursor-pointer" (click)="deleteList()">
@@ -104,12 +103,12 @@
           <ul class="tasksMenu flex flex-col gap-2 grow disabled:p-10 overflow-y-auto">
             <li #taskLi [class.completed]="taskObj.completed" *ngFor="let taskObj of tasksArray" class="taskDescription bg-white py-2 px-2.5 rounded-md flex items-center gap-2 lg:py-4 lg:px-5">
               <p class="grow" (click)="taskClicked(taskObj)">{{ taskObj.title }}</p>
-              <img class="taskIcon p-1 border border-customizeGreen rounded w-8 h-8" [class.hiddenTaskIcon]="taskObj.completed" [routerLink]="'/lists/'+ listId() + '/tasks/' + taskObj._id + '/editTask'" src="assets/icons/editIcon.svg" alt="trashIcon">
+              <img class="taskIcon p-1 border border-customizeGreen rounded w-8 h-8" [class.hiddenTaskIcon]="taskObj.completed" [routerLink]="'/lists/'+ listId + '/tasks/' + taskObj._id + '/editTask'" src="assets/icons/editIcon.svg" alt="trashIcon">
               <img class="taskIcon p-1 border border-customizeGreen rounded w-8 h-8" [class.hiddenTaskIcon]="taskObj.completed" (click)="deleteTask($event, taskObj)" src="assets/icons/trashIcon.svg" alt="trashIcon">
             </li>
           </ul>
 
-          <button class="bg-customizeGreen text-lg rounded-full p-2 min-w-[40px] h-10 min-h-[40px] flex justify-center items-center cursor-pointer text-white self-end" routerLink="/lists/{{listId()}}/newTask">
+          <button class="bg-customizeGreen text-lg rounded-full p-2 min-w-[40px] h-10 min-h-[40px] flex justify-center items-center cursor-pointer text-white self-end" routerLink="/lists/{{listId}}/newTask">
             <img class="w-[75%] h-[75%]" src="assets/icons/plusIcon.svg" alt="addIcon">
           </button>
         </div>
@@ -123,33 +122,3 @@
 </div>
 
 
-<!--
-
-  Impo:
-
-  Learn More About CSS Overflow
-
-  disabled:p-10 what this is for
-
-  the different between ng-template, ng-content and handle the condition of the tasks place properly after
-
-  divide-y divide-gray-100 what this is for
-
-      screens: {
-      'sm': '640px',
-      // => @media (min-width: 640px) { ... }
-
-      'md': '768px',
-      // => @media (min-width: 768px) { ... }
-
-      'lg': '1024px',
-      // => @media (min-width: 1024px) { ... }
-
-      'xl': '1280px',
-      // => @media (min-width: 1280px) { ... }
-
-      '2xl': '1536px',
-      // => @media (min-width: 1536px) { ... }
-    }
-
- -->

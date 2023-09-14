@@ -2,8 +2,11 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { finalize, switchMap } from 'rxjs';
 import { CheckWhiteSpaceDirective } from 'src/app/directives/whiteSpace/check-white-space.directive';
+import { WorkingSpinnersService } from 'src/app/services/spinners-state/working-spinner.service';
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { ErrorBodyType } from 'src/app/shared/types/errorBodyResponse';
 import { TaskType } from 'src/app/shared/types/taskType';
@@ -36,24 +39,14 @@ export class EditTaskComponent implements OnInit, AfterViewInit {
   activatedRoute = inject(ActivatedRoute);
   taskService = inject(TaskService);
   toastr = inject(ToastrService);
+  spinner = inject(NgxSpinnerService);
+  workingSpinners = inject(WorkingSpinnersService);
 
   ngOnInit(){
     console.log('ngOorks!');
 
     this.listId = this.activatedRoute.snapshot.params['listId'];
     this.taskId = this.activatedRoute.snapshot.params['taskId'];
-    this.taskService.getTask(this.listId, this.taskId).subscribe({
-      next: (res) => {
-        this.taskObj = res;
-      },
-      error: (error: ErrorBodyType) => {
-        if(error.shouldNavigate) {
-          this.router.navigateByUrl('');
-          return this.toastr.error(error.message, 'Error');
-        }
-        return this.errorMessage = error.message;
-      }
-    })
   }
 
   ngAfterViewInit(){
@@ -64,10 +57,22 @@ export class EditTaskComponent implements OnInit, AfterViewInit {
 
     this.buttonClicked = true;
     // if(editedTaskForm.invalid || !this.taskObj) return;
+    this.spinner.show('editTask');
+    this.workingSpinners.spinnerStartsWorking('editTask');
 
-    this.taskService.editTask(this.taskObj!, this.inputValue)//=> Remove !
+    this.taskService.getTask(this.listId, this.taskId)
+      .pipe(
+        switchMap((taskObj: TaskType) => {
+          this.taskObj = taskObj;
+          return this.taskService.editTask(this.taskObj!, this.inputValue)
+        }),
+        finalize(() => {
+          this.spinner.hide('editTask');
+          this.workingSpinners.spinnerFinishesWorking('editTask');
+        })
+      )
       .subscribe({
-        next: (res) => {
+        next: (updatedTaskObj: TaskType) => {
           this.router.navigateByUrl(`lists/${this.listId}`)
         },
         error: (error: ErrorBodyType) => {
@@ -78,6 +83,32 @@ export class EditTaskComponent implements OnInit, AfterViewInit {
           return this.errorMessage = error.message;
         } //=> IMPO: Repeat a lot create a function for.
       });
+    // .subscribe({
+    //   next: (res) => {
+    //     this.taskObj = res;
+    //   },
+    //   error: (error: ErrorBodyType) => {
+    //     if(error.shouldNavigate) {
+    //       this.router.navigateByUrl('');
+    //       return this.toastr.error(error.message, 'Error');
+    //     }
+    //     return this.errorMessage = error.message;
+    //   }
+    // })
+
+    // this.taskService.editTask(this.taskObj!, this.inputValue)//=> Remove !
+    //   .subscribe({
+    //     next: (res) => {
+    //       this.router.navigateByUrl(`lists/${this.listId}`)
+    //     },
+    //     error: (error: ErrorBodyType) => {
+    //       if(error.shouldNavigate) {
+    //         this.router.navigateByUrl('');
+    //         return this.toastr.error(error.message, 'Error');
+    //       }
+    //       return this.errorMessage = error.message;
+    //     } //=> IMPO: Repeat a lot create a function for.
+    //   });
 
   }
 

@@ -37,7 +37,7 @@ export class AuthService {
             res.headers.get('X-refresh-token')
           );
         })
-      );//=> STOP Problem Here
+      );
   }
 
   register(email: string, password: string){
@@ -51,7 +51,7 @@ export class AuthService {
             res.headers.get('X-refresh-token')
           );
         })
-      );//=> STOP Problem Here
+      );
   }
 
   logout(){

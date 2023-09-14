@@ -34,7 +34,7 @@ export class EditListComponent implements OnInit, AfterViewInit {
   toastr = inject(ToastrService);
 
   ngOnInit(){
-    this.listId = this.activatedRoute.snapshot.params['listId']; //=> IMPO: Change to observable if we will show the list of lists to change between them from this page it self
+    this.listId = this.activatedRoute.snapshot.params['listId'];
   }
 
   ngAfterViewInit(){
