@@ -1,0 +1,81 @@
+<div class="tasksComponent flex grow flex-col overflow-y-hidden">
+
+  <h3 class="noListSelected text-xl text-center text-[#777]" *ngIf="!tasksArray">
+    <ng-container *ngIf="!isMobile; else isNotMobile">
+      Please select a list from the sidebar or create new one.
+    </ng-container>
+    <ng-template #isNotMobile>
+      Press the note icon to select a list or create new one.
+    </ng-template>
+  </h3>
+
+  <div class="noTasksInTheList grow flex flex-col gap-2 text-xl text-center text-[#777]" *ngIf="tasksArray && tasksArray.length == 0">
+    <header class="flex items-center justify-between relative gap-1">
+      <h1 class="text-customizeGreen">
+        Tasks
+      </h1>
+
+      <button (click)="dropdownVisibilityToggle()" id="dropdownDefaultButton" data-dropdown-toggle="dropdown" type="button" class="dropDownButton flex justify-center items-center rounded-md px-3 py-1.5 border border-customizeGreen hover:shadow-md shadow-customizeLightGreen">
+        <img [class.active]="dropdownVisibility" class="settingIcon" src="assets/icons/settingIcon.svg" alt="settingIcon">
+      </button>
+
+      <div id="dropdown" [class.hidden]="!dropdownVisibility" class="dropDown z-10 bg-white divide-y divide-gray-100 rounded-lg shadow absolute w-28">
+          <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
+            <li class="cursor-pointer" routerLink="/lists/{{ listId }}/editList">
+              <p class="px-4 py-2 hover:bg-gray-100">Edit list</p>
+            </li>
+            <li class="cursor-pointer" (click)="deleteList()">
+              <p class="px-4 py-2 hover:bg-gray-100">Delete list</p>
+            </li>
+          </ul>
+      </div>
+
+
+    </header>
+
+    <h3 class="noTaskInSelectedList grow text-xl text-center text-[#777]">There are no tasks here, click the add button to create new task.</h3>
+
+
+    <button class="bg-customizeGreen text-lg rounded-full p-2 w-10 min-w-[40px] h-10 min-h-[40px] flex justify-center items-center cursor-pointer text-white self-end" *ngIf="tasksArray && tasksArray.length == 0" routerLink="/lists/{{listId}}/newTask">
+      <img class="w-[75%] h-[75%]" src="assets/icons/plusIcon.svg" alt="addIcon">
+    </button>
+  </div>
+
+  <div class="flex grow flex-col gap-2 overflow-y-hidden" *ngIf="tasksArray && tasksArray.length > 0">
+    <header class="flex items-center justify-between relative gap-1">
+      <h1 class="text-customizeGreen">
+        Tasks
+      </h1>
+
+      <button (click)="dropdownVisibilityToggle()" id="dropdownDefaultButton" data-dropdown-toggle="dropdown" type="button" class="dropDownButton flex justify-center items-center rounded-md px-3 py-1.5 border border-customizeGreen hover:shadow-md shadow-customizeLightGreen">
+        <img [class.active]="dropdownVisibility" class="settingIcon" src="assets/icons/settingIcon.svg" alt="settingIcon">
+      </button>
+
+      <div id="dropdown" [class.hidden]="!dropdownVisibility" class="dropDown z-10 bg-white divide-y divide-gray-100 rounded-lg shadow absolute w-28">
+          <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
+            <li class="cursor-pointer" routerLink="/lists/{{listId}}/editList" >
+              <p class="px-4 py-2 hover:bg-gray-100">Edit list</p>
+            </li>
+            <li class="cursor-pointer" (click)="deleteList()">
+              <p class="px-4 py-2 hover:bg-gray-100">Delete list</p>
+            </li>
+          </ul>
+      </div>
+
+    </header>
+
+    <ul class="tasksMenu flex flex-col gap-2 grow pr-2 overflow-y-auto">
+      <li #taskLi [class.completed]="taskObj.completed" *ngFor="let taskObj of tasksArray" class="taskDescription bg-white py-2 px-2.5 rounded-md flex items-center gap-2 lg:py-4 lg:px-5">
+        <p class="grow" (click)="taskClicked(taskObj)">{{ taskObj.title }}</p>
+        <img class="taskIcon p-1 border border-customizeGreen rounded w-8 h-8" [class.hiddenTaskIcon]="taskObj.completed" [routerLink]="'/lists/'+ listId + '/tasks/' + taskObj._id + '/editTask'" src="assets/icons/editIcon.svg" alt="trashIcon">
+        <img class="taskIcon p-1 border border-customizeGreen rounded w-8 h-8" [class.hiddenTaskIcon]="taskObj.completed" (click)="deleteTask($event, taskObj)" src="assets/icons/trashIcon.svg" alt="trashIcon">
+      </li>
+    </ul>
+
+    <button class="bg-customizeGreen text-lg rounded-full p-2 min-w-[40px] h-10 min-h-[40px] flex justify-center items-center cursor-pointer text-white self-end" routerLink="/lists/{{listId}}/newTask">
+      <img class="w-[75%] h-[75%]" src="assets/icons/plusIcon.svg" alt="addIcon">
+    </button>
+  </div>
+
+</div>
+

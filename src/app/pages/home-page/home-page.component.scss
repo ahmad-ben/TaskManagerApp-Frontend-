@@ -1,0 +1,8 @@
+.sidebar{
+  width: 220px;
+  left: calc(-220px);
+  transition: .25s;
+  &.visibleSidebar{
+    left: 0;
+  }
+}

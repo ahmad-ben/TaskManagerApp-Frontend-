@@ -1,0 +1,23 @@
+<div class="listsComponent h-full flex flex-col">
+
+  <h1 class="text-customizeGreen">
+    Lists
+  </h1>
+
+  <ul class="listsMenu flex flex-col mt-[15px] grow overflow-y-auto pr-2 md:pr-6 lg:pr-8">
+    <a *ngFor="let list of listsArray" [routerLinkActive]="'activeList'" routerLink="/homePage/lists/{{list._id}}" class="taskHeader flex active items-center py-[10px] rounded-[5px] w-full text-[#5f5f5f] mb-[5px] px-[15px] hover:bg-customizeLight cursor-pointer active:bg-[#cff8ef] active:text-customizeDarkGreen">
+      <p>
+        {{ list.title }}
+      </p>
+    </a>
+  </ul>
+
+  <button class="bg-customizeGreen p-2 rounded-lg cursor-pointer text-white mr-4 md:mr-6 lg:mr-8" routerLink="/newList">
+    + New List
+  </button>
+
+  <div class="listIconHolder flex items-center justify-center absolute left-full top-8 bg-white min-w-[40px] h-10 min-h-[40px] p-2 cursor-pointer sm:hidden" (click)="noteIconClicked()">
+    <img class="listIcon w-full" src="assets/icons/noteIcon.svg" alt="noteIcon">
+  </div>
+
+</div>

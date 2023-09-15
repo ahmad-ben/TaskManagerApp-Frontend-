@@ -24,7 +24,7 @@ import { ListService } from './../../services/lists/list.service';
 export class TaskViewComponent implements OnInit {
   listId: string = '';
   listsArray: ListType[] = [];
-  tasksArray: TaskType[] | undefined;
+  tasksArray?: TaskType[];
   dropdownVisibility: boolean = false;
   showHiddenSidebar: boolean = false;
   isMobile: Boolean = window.innerWidth < 640;

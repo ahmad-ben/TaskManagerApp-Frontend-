@@ -10,7 +10,6 @@ import { routes } from './app.routes';
 import { FirstErrorHandlerInterceptor } from './services/interceptors/first-error-handler/first-error-handler.interceptor';
 import { HeadersInterceptor } from './services/interceptors/headers/headers.interceptor';
 import { SecondErrorHandlerInterceptor } from './services/interceptors/second-error-handler/second-error-handler.interceptor';
-import { ListsResolveService } from './services/resolves/lists.resolve.service';
 import { toasterPosition } from './shared/functions/toasterPosition';
 
 
@@ -28,7 +27,6 @@ export const appConfig: ApplicationConfig = {
 
     importProvidersFrom(
       NgxSpinnerModule,
-      ListsResolveService
     ),
 
     provideHttpClient( withInterceptorsFromDi(), ),

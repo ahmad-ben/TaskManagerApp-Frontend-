@@ -1,0 +1,38 @@
+.taskDescription{
+  transition: box-shadow .2s ease, scale .2s ease;
+  &:not(.completed){
+    cursor: pointer;
+    &:hover{
+      box-shadow: 0px 2px 2px 2px #eee;
+    }
+    &:active{
+      scale: .95;
+    }
+  }
+  &.completed{
+    text-decoration: line-through;
+    opacity: .75;
+  }
+
+}
+
+.hidden{
+  display: none;
+}
+
+.dropDown{
+  right: 0%;
+  top: calc(100% + 5px);
+}
+
+.dropDownButton{
+  width: 55px;
+  height: 35px;
+}
+
+.settingIcon{
+  transition: .25s;
+  &.active{
+    rotate: 180deg;
+  }
+}

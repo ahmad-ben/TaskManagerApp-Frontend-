@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable, catchError, finalize, map, switchMap, tap } from 'rxjs';
 import { EditListComponent } from './pages/edit-list/edit-list.component';
 import { EditTaskComponent } from './pages/edit-task/edit-task.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NewListComponent } from './pages/new-list/new-list.component';
 import { NewTaskComponent } from './pages/new-task/new-task.component';
@@ -26,6 +27,7 @@ export const listsResolver: ResolveFn<any> =
     const workingSpinners = inject(WorkingSpinnersService);
     console.log('listsResolver works');
     console.log('starts here');
+
     spinner.show('getLists');
     workingSpinners.spinnerStartsWorking('getLists');
     return inject(ListService).getLists()
@@ -81,18 +83,31 @@ export const listsAndTasksResolver: ResolveFn<Observable<(ListType[] | TaskType[
         return [];
       }),
       finalize(() => {
-        setTimeout(() => {
+        // setTimeout(() => {
           console.log('time finalize works')
           spinner.hide('getListsAndTasks');
           workingSpinners.spinnerFinishesWorking('getListsAndTasks');
-        }, 2000);
+        // }, 2000);
 
       })
     )
   }
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'lists', pathMatch: 'full' },
+  { path: '', redirectTo: 'homePage/lists', pathMatch: 'full' },
+
+  {
+    path: 'homePage/lists/:listId',
+    component: HomePageComponent,
+    resolve : {
+      'listsAndTasksArray' : listsAndTasksResolver,
+    }
+  },
+  {
+    path: 'homePage/lists',
+    component: HomePageComponent,
+    resolve : { 'lists' : listsResolver }
+  },
 
   {
     path: 'lists/:listId',

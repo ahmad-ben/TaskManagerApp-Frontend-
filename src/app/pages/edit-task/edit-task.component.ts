@@ -56,7 +56,7 @@ export class EditTaskComponent implements OnInit, AfterViewInit {
   editTask(editedTaskForm: NgForm){
 
     this.buttonClicked = true;
-    if(editedTaskForm.invalid || !this.taskObj) return;
+    if(editedTaskForm.invalid) return;
     this.spinner.show('editTask');
     this.workingSpinners.spinnerStartsWorking('editTask');
 

@@ -1,0 +1,23 @@
+.activeList{
+  background-color: hsl(0, 0%, 97%);
+}
+.taskIcon{
+  transition: .3s;
+  &.hiddenTaskIcon{
+    scale: .5;
+    opacity: 0;
+  }
+}
+
+.listIconHolder{
+  animation-name: lighten;
+  animation-iteration-count: infinite;
+  animation-duration: 1.5s;
+  animation-direction: alternate-reverse;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes lighten {
+  from { opacity: 75% }
+  to { opacity: 100% }
+}
