@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { ErrorBodyType } from 'src/app/shared/types/errorBodyResponse';
 import { AuthService } from '../../auth/auth.service';
 
@@ -20,7 +20,6 @@ export class ClientErrorsInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     console.log('INTERCEPTOR 5 ClientErrorsInterceptor: ', req);
     return next.handle(req).pipe(
-      tap((test) => { console.log('Tap In Second Inter', test, req); }),
 
       catchError((httpErrorRes: HttpErrorResponse) => {
 
@@ -29,11 +28,12 @@ export class ClientErrorsInterceptor implements HttpInterceptor {
 
         if(httpErrorRes.status == 400 || httpErrorRes.status == 404){
 
+          console.log('this should work: ', httpErrorRes.status);
           return throwError(() => errorBody);
 
         }
 
-        return next.handle(req);
+        else return next.handle(req);
 
       })
     )

@@ -63,4 +63,19 @@ button.invalidInputState{
   color: #c91313;
 }
 
-
+.inputStyle{
+  display: block;
+  width: 100%;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  padding: 0.5rem; //8px
+  background-color: $light;
+  font-size: 1rem; //16px
+  line-height: 1.5rem; //24px
+  color: $dark-green;
+  border-radius: 0.5rem;
+  border-width: 2px;
+  &:focus{
+    border-color: $green;
+  }
+}
