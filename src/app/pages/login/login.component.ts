@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           console.log('login next works', res);
 
           this.toastr.success( 'Login Success!', 'Welcome.');
-          this.router.navigateByUrl('');
+          this.router.navigateByUrl('/homePage/lists');
         },
         error: (error: ErrorBodyType) => {
           console.log('login error works', error);

@@ -25,7 +25,7 @@ export class ServerErrorsInterceptor implements HttpInterceptor {
         console.log('INTERCEPTOR 4 ServerErrorsInterceptor In catchError', httpErrorRes);
 
         const errorBody : ErrorBodyType = httpErrorRes.error;
-        if(!httpErrorRes.status) return throwError(() => httpErrorRes);
+        if(!httpErrorRes.status === undefined) return throwError(() => httpErrorRes);
 
         this.toastr.error('Something went wrong.', 'Error');
         this.authService.logout();

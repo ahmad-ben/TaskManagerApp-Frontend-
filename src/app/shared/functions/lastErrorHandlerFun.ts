@@ -6,7 +6,7 @@ export const lastErrorHandlerFun = (
   error: ErrorBodyType, router: Router, toastr: ToastrService
 ): string | undefined => {
   if(error.shouldNavigate) {
-    router.navigateByUrl('');
+    router.navigateByUrl('/homePage/lists');
     toastr.error(error.message, 'Error');
     return;
   }

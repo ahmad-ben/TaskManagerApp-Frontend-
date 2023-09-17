@@ -30,7 +30,7 @@ export class ListsComponent {
     console.log('deleteList works with', this.listId);
     this.listService.deleteList(this.listId).subscribe({
       next: (res) => {
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('/homePage/lists');
       },
     });
   }

@@ -56,7 +56,7 @@ export class AuthService {
 
   logout(){
     this.deleteLoginInfo();
-    this.router.navigateByUrl('login');
+    this.router.navigateByUrl('/login');
   }
 
   getAccessToken(){

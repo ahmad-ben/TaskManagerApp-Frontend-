@@ -2,8 +2,7 @@ import { inject } from "@angular/core";
 import { ActivatedRouteSnapshot, ResolveFn, Router, RouterStateSnapshot } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from "ngx-toastr";
-import { Observable, catchError, finalize, map, switchMap } from "rxjs";
-import { ErrorBodyType } from "src/app/shared/types/errorBodyResponse";
+import { Observable, finalize, map, switchMap } from "rxjs";
 import { ListType } from "src/app/shared/types/listType";
 import { TaskType } from "src/app/shared/types/taskType";
 import { ListService } from "../lists/list.service";
@@ -37,11 +36,6 @@ export const listsAndTasksResolver: ResolveFn<Observable<(ListType[] | TaskType[
         arrayOfListsAndTasks.push(tasksArray);
         console.log(arrayOfListsAndTasks);
         return arrayOfListsAndTasks
-      }),
-      catchError((error: ErrorBodyType) => {
-        router.navigateByUrl('');
-        toastr.error(error.message);
-        return [];
       }),
       finalize(() => {
         // setTimeout(() => {

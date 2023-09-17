@@ -11,7 +11,7 @@ import { listsAndTasksResolver } from './services/resolvers/lists&tasks.service.
 import { listsResolver } from './services/resolvers/lists.service.resolver';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'homePage/lists', pathMatch: 'full' },
+  { path: '', redirectTo: definedTheFirstPath(), pathMatch: 'full' },
 
   {
     path: 'homePage/lists/:listId',
@@ -41,3 +41,18 @@ export const routes: Routes = [
   { path: '**', component: NotFoundComponent },
 
 ];
+
+export function definedTheFirstPath():string {
+  const userId = localStorage.getItem('userId');
+  const JWTToken = localStorage.getItem('accessToken');
+  const sessionToken = localStorage.getItem('refreshToken');
+
+  console.log('definedTheFirstPath', userId,
+  JWTToken,
+  sessionToken);
+
+
+  if(userId && JWTToken && sessionToken) return 'homePage/lists'
+  return 'login'
+
+}

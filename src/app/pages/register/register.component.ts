@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       .subscribe({
         next: (res: HttpResponse<any>) => {
           this.toastr.success( 'Login Success!', 'Welcome.');
-          this.router.navigateByUrl('')
+          this.router.navigateByUrl('/homePage/lists')
         },
         error: (error: ErrorBodyType) => {
           console.log(error);
