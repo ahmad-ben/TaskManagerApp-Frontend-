@@ -73,7 +73,7 @@ export class EditTaskComponent implements OnInit, AfterViewInit {
       )
       .subscribe({
         next: (updatedTaskObj: TaskType) => {
-          this.router.navigateByUrl(`lists/${this.listId}`)
+          this.router.navigateByUrl(`homePage/lists/${this.listId}`)
         },
         error: (error: ErrorBodyType) => {
           if(error.shouldNavigate) {

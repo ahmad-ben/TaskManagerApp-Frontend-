@@ -45,7 +45,7 @@ export class TasksComponent {
     event.stopPropagation();
     this.taskService.deleteTask(taskDocument).subscribe({
       next: (res: any) => {
-        this.redirectTo(`lists/${this.listId}`);
+        this.redirectTo(`homePage/lists/${this.listId}`);
       },
     });
   }

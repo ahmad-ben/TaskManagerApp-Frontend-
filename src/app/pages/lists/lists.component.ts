@@ -7,19 +7,16 @@ import { ListType } from 'src/app/shared/types/listType';
 @Component({
   selector: 'lists',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    RouterLinkActive
-  ],
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './lists.component.html',
-  styleUrls: ['./lists.component.scss']
+  styleUrls: ['./lists.component.scss'],
 })
 export class ListsComponent {
   @Input('listId') listId: string = '';
   @Input('listsArray') listsArray: ListType[] = [];
 
-  @Output('noteIconClicked') noteIconClickedInChild: EventEmitter<boolean> = new EventEmitter();
+  @Output('noteIconClicked') noteIconClickedInChild: EventEmitter<boolean> =
+    new EventEmitter();
 
   listService = inject(ListService);
   router = inject(Router);
@@ -31,12 +28,10 @@ export class ListsComponent {
 
   deleteList() {
     console.log('deleteList works with', this.listId);
-    //=> STOP Checking problems.
     this.listService.deleteList(this.listId).subscribe({
       next: (res) => {
         this.router.navigateByUrl('');
       },
     });
   }
-
 }

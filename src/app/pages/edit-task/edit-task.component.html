@@ -15,7 +15,7 @@
           name="editedTaskName" [(ngModel)]="inputValue" #inputControlState="ngModel"
           class="block w-full outline-none p-2 bg-customizeLight text-base text-customizeDarkGreen rounded-lg border-2 focus:border-customizeGreen"
           placeholder="Write task title..."
-          required minlength="1" maxlength="50" checkWhiteSpace
+          required minlength="1" maxlength="100" checkWhiteSpace
         >
 
         <div class="errorMessages" *ngIf="inputControlState.invalid && (inputControlState.dirty || inputControlState.touched || buttonClicked)">
@@ -29,7 +29,7 @@
           </span>
 
           <span *ngIf="inputControlState.errors?.['maxlength']">
-            The edited Name of the task must be at max 50 characters long.
+            The edited Name of the task must be at max 100 characters long.
           </span>
 
           <span *ngIf="inputControlState.errors?.['whiteSpace']">
@@ -45,7 +45,7 @@
         <button
           type="button"
           class="p-2 text-base text-white bg-customizeDarkGreen rounded-lg outline-0"
-          routerLink="/lists/{{ listId }}"
+          routerLink="/homePage/lists/{{ listId }}"
           >
           Cancel
         </button>

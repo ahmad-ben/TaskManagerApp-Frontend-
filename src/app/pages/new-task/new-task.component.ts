@@ -49,7 +49,7 @@ export class NewTaskComponent implements OnInit, AfterViewInit  {
     this.taskService.createTask(this.listId, this.inputValue)
       .subscribe({
         next: (newTaskFromDB: TaskType) => {
-          this.router.navigateByUrl(`/lists/${newTaskFromDB._listId}`);
+          this.router.navigateByUrl(`/homePage/lists/${newTaskFromDB._listId}`);
         },
         error: (error: ErrorBodyType) => {
           if(error.shouldNavigate) {

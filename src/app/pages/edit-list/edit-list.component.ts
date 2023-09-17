@@ -49,7 +49,7 @@ export class EditListComponent implements OnInit, AfterViewInit {
     this.listService.editList(this.listId, this.inputValue)
       .subscribe({
         next: (res) => {
-          this.router.navigateByUrl(`lists/${this.listId}`)
+          this.router.navigateByUrl(`homePage/lists/${this.listId}`)
         },
         error: (error: ErrorBodyType) => {
           if(error.shouldNavigate) {

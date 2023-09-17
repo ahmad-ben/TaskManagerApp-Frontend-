@@ -36,3 +36,17 @@
     rotate: 180deg;
   }
 }
+
+.taskIcon{
+  transition: .3s;
+  &.hiddenTaskIcon{
+    scale: .5;
+    opacity: 0;
+  }
+}
+
+.taskTitle{
+  max-width: calc(100% - 80px);
+
+  overflow-wrap: break-word;
+}

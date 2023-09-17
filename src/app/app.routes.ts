@@ -11,7 +11,6 @@ import { NewListComponent } from './pages/new-list/new-list.component';
 import { NewTaskComponent } from './pages/new-task/new-task.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { TaskViewComponent } from './pages/task-view/task-view.component';
 import { ListService } from './services/lists/list.service';
 import { WorkingSpinnersService } from './services/spinners-state/working-spinner.service';
 import { TaskService } from './services/tasks/task.service';
@@ -109,19 +108,19 @@ export const routes: Routes = [
     resolve : { 'lists' : listsResolver }
   },
 
-  {
-    path: 'lists/:listId',
-    component: TaskViewComponent,
-    resolve : {
-      'listsAndTasksArray' : listsAndTasksResolver,
-    }
-  },
+  // {
+  //   path: 'lists/:listId',
+  //   component: TaskViewComponent,
+  //   resolve : {
+  //     'listsAndTasksArray' : listsAndTasksResolver,
+  //   }
+  // },
 
-  {
-    path: 'lists',
-    component: TaskViewComponent,
-    resolve : { 'lists' : listsResolver }
-  },
+  // {
+  //   path: 'lists',
+  //   component: TaskViewComponent,
+  //   resolve : { 'lists' : listsResolver }
+  // },
 
   { path: 'lists/:listId/editList', component: EditListComponent },
   { path: 'lists/:listId/tasks/:taskId/editTask', component: EditTaskComponent },

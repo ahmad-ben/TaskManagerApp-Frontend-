@@ -7,13 +7,14 @@
 
   <div class="flex justify-center items-center grow sm:p-3 overflow-y-hidden">
 
-    <div class="dashboad relative flex w-full h-full max-w-[1000px] sm:static overflow-y-hidden">
+  <div class="dashboad relative flex w-full h-full max-w-[1000px] sm:static overflow-y-hidden">
 
       <lists
         [class.visibleSidebar]="showHiddenSidebar"
         class="sidebar absolute z-10 h-full bg-white py-4 pl-4 rounded-l-lg sm:w-1/5 sm:static sm:rounded-l-lg md:py-6 md:pl-6 lg:py-8 lg:pl-8"
         #listsComponent
         (noteIconClicked)="noteIconClicked()"
+        [listId]="listId"
         [listsArray]="listsArray"
       ></lists>
 

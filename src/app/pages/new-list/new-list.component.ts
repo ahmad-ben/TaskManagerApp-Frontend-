@@ -42,7 +42,7 @@ export class NewListComponent implements AfterViewInit {
     this.listService.createList(this.inputValue)
       .subscribe({
         next: (newListFromDB: any) => {
-          this.route.navigateByUrl(`/lists/${newListFromDB._id}`);
+          this.route.navigateByUrl(`/homePage/lists/${newListFromDB._id}`);
         },
         error: (error: ErrorBodyType) => {
           this.errorMessage = error.message;
