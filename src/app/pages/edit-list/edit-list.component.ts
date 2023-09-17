@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CheckWhiteSpaceDirective } from 'src/app/directives/whiteSpace/check-white-space.directive';
 import { ListService } from 'src/app/services/lists/list.service';
+import { lastErrorHandlerFun } from 'src/app/shared/functions/lastErrorHandlerFun';
 import { ErrorBodyType } from 'src/app/shared/types/errorBodyResponse';
 
 @Component({
@@ -52,14 +53,13 @@ export class EditListComponent implements OnInit, AfterViewInit {
           this.router.navigateByUrl(`homePage/lists/${this.listId}`)
         },
         error: (error: ErrorBodyType) => {
-          if(error.shouldNavigate) {
-            this.router.navigateByUrl('');
-            return this.toastr.error(error.message, 'Error');
-          }
-          return this.errorMessage = error.message;
+          this.errorMessage = lastErrorHandlerFun(
+            error, this.router, this.toastr
+          ) || '';
         }
       });
 
   }
 
 }
+

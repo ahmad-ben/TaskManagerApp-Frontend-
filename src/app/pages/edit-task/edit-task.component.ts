@@ -8,6 +8,7 @@ import { finalize, switchMap } from 'rxjs';
 import { CheckWhiteSpaceDirective } from 'src/app/directives/whiteSpace/check-white-space.directive';
 import { WorkingSpinnersService } from 'src/app/services/spinners-state/working-spinner.service';
 import { TaskService } from 'src/app/services/tasks/task.service';
+import { lastErrorHandlerFun } from 'src/app/shared/functions/lastErrorHandlerFun';
 import { ErrorBodyType } from 'src/app/shared/types/errorBodyResponse';
 import { TaskType } from 'src/app/shared/types/taskType';
 
@@ -76,11 +77,9 @@ export class EditTaskComponent implements OnInit, AfterViewInit {
           this.router.navigateByUrl(`homePage/lists/${this.listId}`)
         },
         error: (error: ErrorBodyType) => {
-          if(error.shouldNavigate) {
-            this.router.navigateByUrl('');
-            return this.toastr.error(error.message, 'Error');
-          }
-          return this.errorMessage = error.message;
+          this.errorMessage = lastErrorHandlerFun(
+            error, this.router, this.toastr
+          ) || '';
         }
       });
 
