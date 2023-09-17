@@ -7,9 +7,12 @@ import { provideToastr } from 'ngx-toastr';
 
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { routes } from './app.routes';
-import { FirstErrorHandlerInterceptor } from './services/interceptors/first-error-handler/first-error-handler.interceptor';
+import { CheckConnectionInterceptor } from './services/interceptors/check-connection/check-connection.interceptor';
+import { ClientErrorsInterceptor } from './services/interceptors/client-errors/client-errors.interceptor';
 import { HeadersInterceptor } from './services/interceptors/headers/headers.interceptor';
-import { SecondErrorHandlerInterceptor } from './services/interceptors/second-error-handler/second-error-handler.interceptor';
+import { ServerErrorsInterceptor } from './services/interceptors/server-errors/server-errors.interceptor';
+import { SpinnerInterceptor } from './services/interceptors/spinner/spinner.interceptor';
+import { UnauthorizedErrorsInterceptor } from './services/interceptors/unauthorized-errors/unauthorized-errors.interceptor';
 import { toasterPosition } from './shared/functions/toasterPosition';
 
 
@@ -32,9 +35,12 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient( withInterceptorsFromDi(), ),
 
     [
+      { provide: HTTP_INTERCEPTORS, useClass: CheckConnectionInterceptor, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
       { provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true },
-      { provide: HTTP_INTERCEPTORS, useClass: SecondErrorHandlerInterceptor, multi: true },
-      { provide: HTTP_INTERCEPTORS, useClass: FirstErrorHandlerInterceptor, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: ServerErrorsInterceptor, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: ClientErrorsInterceptor, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedErrorsInterceptor, multi: true },
     ],
 
     provideRouter(routes)

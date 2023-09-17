@@ -108,20 +108,6 @@ export const routes: Routes = [
     resolve : { 'lists' : listsResolver }
   },
 
-  // {
-  //   path: 'lists/:listId',
-  //   component: TaskViewComponent,
-  //   resolve : {
-  //     'listsAndTasksArray' : listsAndTasksResolver,
-  //   }
-  // },
-
-  // {
-  //   path: 'lists',
-  //   component: TaskViewComponent,
-  //   resolve : { 'lists' : listsResolver }
-  // },
-
   { path: 'lists/:listId/editList', component: EditListComponent },
   { path: 'lists/:listId/tasks/:taskId/editTask', component: EditTaskComponent },
 
