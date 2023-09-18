@@ -26,7 +26,6 @@ export class TasksComponent {
 
   router = inject(Router);
   taskService = inject(TaskService);
-  // listsComponent = inject(ListsComponent);
 
   deleteList(){
     this.listsCom.deleteList();
@@ -45,15 +44,11 @@ export class TasksComponent {
     event.stopPropagation();
     this.taskService.deleteTask(taskDocument).subscribe({
       next: (res: any) => {
-        this.redirectTo(`homePage/lists/${this.listId}`);
+        if(!this.tasksArray?.includes(taskDocument)) return;
+        this.tasksArray = this.tasksArray
+          .filter((taskDocumentFromArray) => taskDocumentFromArray !== taskDocument);
       },
     });
-  }
-
-  redirectTo(uri: string) {
-    this.router
-      .navigateByUrl('/', { skipLocationChange: true })
-      .then(() => this.router.navigate([uri]));
   }
 
   dropdownVisibilityToggle() {
