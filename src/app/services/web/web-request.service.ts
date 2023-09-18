@@ -6,9 +6,7 @@ import { Injectable, inject } from '@angular/core';
   providedIn: 'root',
 })
 export class WebRequestService  {
-  // readonly rootUrl: string = 'https://taskmanagerapp-backend.onrender.com';
-  readonly rootUrl: string = 'http://192.168.1.4:80';
-
+  readonly rootUrl: string = 'https://taskmanagerapp-backend.onrender.com';
 
   http = inject(HttpClient);
 
