@@ -8,7 +8,6 @@ import {
 import { Injectable, inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { EMPTY, Observable, catchError, throwError } from 'rxjs';
-import { ErrorBodyType } from 'src/app/shared/types/errorBodyResponse';
 import { AuthService } from '../../auth/auth.service';
 
 @Injectable()
@@ -24,8 +23,7 @@ export class ServerErrorsInterceptor implements HttpInterceptor {
       catchError((httpErrorRes: HttpErrorResponse) => {
         console.log('INTERCEPTOR 4 ServerErrorsInterceptor In catchError', httpErrorRes);
 
-        const errorBody : ErrorBodyType = httpErrorRes.error;
-        if(!httpErrorRes.status === undefined) return throwError(() => httpErrorRes);
+        if(httpErrorRes.status === undefined) return throwError(() => httpErrorRes);
 
         this.toastr.error('Something went wrong.', 'Error');
         this.authService.logout();
