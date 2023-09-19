@@ -22,12 +22,10 @@ export class ListsComponent {
   router = inject(Router);
 
   noteIconClicked() {
-    console.log('noteIconClicked in child works...');
     this.noteIconClickedInChild.emit();
   }
 
   deleteList() {
-    console.log('deleteList works with', this.listId);
     this.listService.deleteList(this.listId).subscribe({
       next: (res) => {
         this.router.navigateByUrl('/homePage/lists');

@@ -13,9 +13,6 @@ export class CheckConnectionInterceptor implements HttpInterceptor {
   toastr = inject(ToastrService);
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-console.log('INTERCEPTOR 1 CheckConnectionInterceptor: ', req);
-
-
     if (!navigator.onLine) {
       this.toastr.error(
         'No connection',

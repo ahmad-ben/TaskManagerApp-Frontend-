@@ -9,15 +9,12 @@ export const listsResolver: ResolveFn<any> =
   (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
     const spinner = inject(NgxSpinnerService);
     const workingSpinners = inject(WorkingSpinnersService);
-    console.log('listsResolver works');
-    console.log('starts here');
 
     spinner.show('getLists');
     workingSpinners.spinnerStartsWorking('getLists');
     return inject(ListService).getLists()
       .pipe(
         finalize(() => {
-          console.log('finalize here');
             spinner.hide('getLists');
             workingSpinners.spinnerFinishesWorking('getLists');
         })

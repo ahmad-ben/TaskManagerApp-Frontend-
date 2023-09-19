@@ -15,10 +15,8 @@ export class HeadersInterceptor implements HttpInterceptor {
   authService = inject(AuthService);
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log('INTERCEPTOR 3 HeadersInterceptor: ', req);
     req = this.addAuthHeader(req);
     return next.handle(req);
-
   }
 
   addAuthHeader(req: HttpRequest<any>){

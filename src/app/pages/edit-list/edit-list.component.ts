@@ -56,7 +56,7 @@ export class EditListComponent implements OnInit, AfterViewInit {
           this.errorMessage = lastErrorHandlerFun(
             error, this.router, this.toastr
           ) || '';
-        }
+        },
       });
 
   }

@@ -14,7 +14,6 @@ export const listsAndTasksResolver: ResolveFn<Observable<(ListType[] | TaskType[
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ) => {
-    console.log('listsAndTasksResolver works');
 
     const taskService = inject(TaskService);
     const toastr = inject(ToastrService);
@@ -34,15 +33,11 @@ export const listsAndTasksResolver: ResolveFn<Observable<(ListType[] | TaskType[
       }),
       map((tasksArray: TaskType[]) => {
         arrayOfListsAndTasks.push(tasksArray);
-        console.log(arrayOfListsAndTasks);
         return arrayOfListsAndTasks
       }),
       finalize(() => {
-        // setTimeout(() => {
-          console.log('time finalize works')
           spinner.hide('getListsAndTasks');
           workingSpinners.spinnerFinishesWorking('getListsAndTasks');
-        // }, 2000);
 
       })
     )

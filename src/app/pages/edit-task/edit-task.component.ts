@@ -44,8 +44,6 @@ export class EditTaskComponent implements OnInit, AfterViewInit {
   workingSpinners = inject(WorkingSpinnersService);
 
   ngOnInit(){
-    console.log('ngOorks!');
-
     this.listId = this.activatedRoute.snapshot.params['listId'];
     this.taskId = this.activatedRoute.snapshot.params['taskId'];
   }

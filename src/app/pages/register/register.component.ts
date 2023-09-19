@@ -70,8 +70,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           this.router.navigateByUrl('/homePage/lists')
         },
         error: (error: ErrorBodyType) => {
-          console.log(error);
-
           this.errorMessage = error.message;
         }
       })

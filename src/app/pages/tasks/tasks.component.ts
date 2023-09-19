@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { TaskType } from 'src/app/shared/types/taskType';
@@ -16,7 +16,11 @@ import { ListsComponent } from './../lists/lists.component';
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
 })
-export class TasksComponent {
+
+export class TasksComponent implements OnChanges {
+  ngOnChanges(changes: SimpleChanges): void {
+    throw new Error('Method not implemented.');
+  }
   isMobile: Boolean = window.innerWidth < 640;
   dropdownVisibility: boolean = false;
 
@@ -26,6 +30,7 @@ export class TasksComponent {
 
   router = inject(Router);
   taskService = inject(TaskService);
+  changeDetectorRef = inject(ChangeDetectorRef);
 
   deleteList(){
     this.listsCom.deleteList();
@@ -35,7 +40,7 @@ export class TasksComponent {
     taskDocument.completed = !taskDocument.completed;
     this.taskService.editTask(taskDocument).subscribe({
       next: (updateTaskDocument: TaskType) => {
-        this.sortTasksArray();
+        this.sortTasksArray(this.tasksArray!);
       },
     });
   }
@@ -55,13 +60,15 @@ export class TasksComponent {
     this.dropdownVisibility = !this.dropdownVisibility;
   }
 
-  sortTasksArray() {
-    if (!this.tasksArray) return;
-    this.tasksArray.sort((taskOne, taskTwo) => {
+  sortTasksArray(tasksArray: TaskType[] | undefined) {
+    if (tasksArray == undefined ) return;
+
+    this.tasksArray = tasksArray.sort((taskOne, taskTwo) => {
       if (taskOne.completed && !taskTwo.completed) return 1;
       if (!taskOne.completed && taskTwo.completed) return -1;
       return 0;
     });
+
   }
 
 }

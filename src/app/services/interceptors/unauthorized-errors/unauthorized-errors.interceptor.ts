@@ -18,11 +18,9 @@ export class UnauthorizedErrorsInterceptor implements HttpInterceptor {
   toastr = inject(ToastrService);
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log('INTERCEPTOR 6 UnauthorizedErrorsInterceptor: ', req);
     return next.handle(req).pipe(
 
       catchError((httpErrorRes: HttpErrorResponse) => {
-        console.log('INTERCEPTOR 6 UnauthorizedErrorsInterceptor In catchError', httpErrorRes);
         const errorBody : ErrorBodyType = httpErrorRes.error;
 
         if(httpErrorRes.status == 401) {

@@ -18,17 +18,14 @@ export class ClientErrorsInterceptor implements HttpInterceptor {
   toastr = inject(ToastrService);
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log('INTERCEPTOR 5 ClientErrorsInterceptor: ', req);
     return next.handle(req).pipe(
 
       catchError((httpErrorRes: HttpErrorResponse) => {
 
-        console.log('INTERCEPTOR 5 ClientErrorsInterceptor In catchError', httpErrorRes);
         const errorBody : ErrorBodyType = httpErrorRes.error;
 
         if(httpErrorRes.status == 400 || httpErrorRes.status == 404){
 
-          console.log('this should work: ', httpErrorRes.status);
           return throwError(() => errorBody);
 
         }

@@ -66,14 +66,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
     )
       .subscribe({
         next: (res: HttpResponse<any>) => {
-          console.log('login next works', res);
-
           this.toastr.success( 'Login Success!', 'Welcome.');
           this.router.navigateByUrl('/homePage/lists');
         },
         error: (error: ErrorBodyType) => {
-          console.log('login error works', error);
-
           this.errorMessage = error.message;
         }
       });

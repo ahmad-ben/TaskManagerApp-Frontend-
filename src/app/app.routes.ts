@@ -47,11 +47,6 @@ export function definedTheFirstPath():string {
   const JWTToken = localStorage.getItem('accessToken');
   const sessionToken = localStorage.getItem('refreshToken');
 
-  console.log('definedTheFirstPath', userId,
-  JWTToken,
-  sessionToken);
-
-
   if(userId && JWTToken && sessionToken) return 'homePage/lists'
   return 'login'
 

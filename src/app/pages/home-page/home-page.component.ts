@@ -33,8 +33,6 @@ export class HomePageComponent implements OnInit, AfterViewInit{
   ngOnInit() {
     this.activateRoute.params.subscribe({
       next: (params: Params) => {
-        console.log('activateRoute works');
-
         if (!params['listId'])
           return (this.listsArray = this.activateRoute.snapshot.data['lists']);
 
@@ -42,20 +40,20 @@ export class HomePageComponent implements OnInit, AfterViewInit{
         this.activateRoute.snapshot.data['listsAndTasksArray'];
         this.listsArray = arrayOfListsAndTasks[0] as ListType[];
         this.tasksArray = arrayOfListsAndTasks[1] as TaskType[];
+
+        setTimeout(() => {}, 0);
         this.listId = params['listId'];
         this.showHiddenSidebar = false;
-        this.tasksComponent?.sortTasksArray();
+        this.tasksComponent?.sortTasksArray(this.tasksArray);
       },
     });
   }
 
   ngAfterViewInit() {
-    this.tasksComponent!.sortTasksArray();
+    this.tasksComponent!.sortTasksArray(this.tasksArray);
   }
 
   noteIconClicked() {
-    console.log('noteIconClicked works...');
-
     this.showHiddenSidebar = !this.showHiddenSidebar;
   }
 
@@ -64,3 +62,4 @@ export class HomePageComponent implements OnInit, AfterViewInit{
   }
 
 }
+

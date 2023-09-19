@@ -17,11 +17,9 @@ export class ServerErrorsInterceptor implements HttpInterceptor {
   toastr = inject(ToastrService);
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log('INTERCEPTOR 4 ServerErrorsInterceptor: ', req);
     return next.handle(req).pipe(
 
       catchError((httpErrorRes: HttpErrorResponse) => {
-        console.log('INTERCEPTOR 4 ServerErrorsInterceptor In catchError', httpErrorRes);
 
         if(httpErrorRes.status === undefined) return throwError(() => httpErrorRes);
 

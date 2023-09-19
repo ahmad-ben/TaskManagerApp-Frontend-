@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Observable, finalize } from 'rxjs';
+import { Observable, finalize, first } from 'rxjs';
 import { WorkingSpinnersService } from '../../spinners-state/working-spinner.service';
 
 @Injectable()
@@ -17,9 +17,8 @@ export class SpinnerInterceptor implements HttpInterceptor {
   spinner = inject(NgxSpinnerService);
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log('INTERCEPTOR 2 SpinnerInterceptor: ', req);
-
     this.workingSpinners.arrayOfWorkingSpinners$
+      .pipe( first() )
       .subscribe({
         next: ((arrayOfWorkingSpinners: string[]) => {
           if(arrayOfWorkingSpinners.length == 0) this.isASpinnerWorking = false;
