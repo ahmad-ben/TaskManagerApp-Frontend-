@@ -12,6 +12,7 @@ import { listsResolver } from './services/resolvers/lists.service.resolver';
 
 export const routes: Routes = [
   { path: '', redirectTo: definedTheFirstPath(), pathMatch: 'full' },
+  { path: 'homePage', redirectTo: definedTheFirstPath(), pathMatch: 'full' },
 
   {
     path: 'homePage/lists/:listId',
