@@ -5,7 +5,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideToastr } from 'ngx-toastr';
 
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpHandlerFn, HttpInterceptorFn, HttpRequest, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { routes } from './app.routes';
 import { CheckConnectionInterceptor } from './services/interceptors/check-connection/check-connection.interceptor';
 import { ClientErrorsInterceptor } from './services/interceptors/client-errors/client-errors.interceptor';
@@ -15,6 +15,10 @@ import { SpinnerInterceptor } from './services/interceptors/spinner/spinner.inte
 import { UnauthorizedErrorsInterceptor } from './services/interceptors/unauthorized-errors/unauthorized-errors.interceptor';
 import { toasterPosition } from './shared/functions/toasterPosition';
 
+export const noopInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next:
+  HttpHandlerFn) => {
+    return next(req);
+  };
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,13 +31,7 @@ export const appConfig: ApplicationConfig = {
       maxOpened: 1,
       preventDuplicates: true
     }),
-
-    importProvidersFrom(
-      NgxSpinnerModule,
-    ),
-
-    provideHttpClient( withInterceptorsFromDi(), ),
-
+    provideHttpClient( withInterceptorsFromDi() ),
     [
       { provide: HTTP_INTERCEPTORS, useClass: CheckConnectionInterceptor, multi: true },
       { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
@@ -42,11 +40,10 @@ export const appConfig: ApplicationConfig = {
       { provide: HTTP_INTERCEPTORS, useClass: ClientErrorsInterceptor, multi: true },
       { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedErrorsInterceptor, multi: true },
     ],
-
-    provideRouter(routes)
+    provideRouter(routes),
+    importProvidersFrom( NgxSpinnerModule ),
 
   ],
 
-
-
 };
+
