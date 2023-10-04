@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { TaskType } from 'src/app/shared/types/taskType';
@@ -17,10 +17,7 @@ import { ListsComponent } from './../lists/lists.component';
   styleUrls: ['./tasks.component.scss']
 })
 
-export class TasksComponent implements OnChanges {
-  ngOnChanges(changes: SimpleChanges): void {
-    throw new Error('Method not implemented.');
-  }
+export class TasksComponent {
   isMobile: Boolean = window.innerWidth < 640;
   dropdownVisibility: boolean = false;
 
