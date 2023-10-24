@@ -15,11 +15,6 @@ import { SpinnerInterceptor } from './services/interceptors/spinner/spinner.inte
 import { UnauthorizedErrorsInterceptor } from './services/interceptors/unauthorized-errors/unauthorized-errors.interceptor';
 import { toasterPosition } from './shared/functions/toasterPosition';
 
-export const noopInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next:
-  HttpHandlerFn) => {
-    return next(req);
-  };
-
 export const appConfig: ApplicationConfig = {
   providers: [
 
