@@ -1,27 +1,41 @@
-# Frontend
+# Notes Not It  
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+**Notes Not It** is a modern task manager app designed to help you stay organized and productive. While inspired by ideas from [this YouTube playlist](https://www.youtube.com/playlist?list=PLIjdNHWULhPSZFDzQU6AnbVQNNo1NTRpd), the app goes beyond the basics by adding:  
 
-## Development server
+- Enhanced **security features** like login/logout and session handling.  
+- Better **responsiveness** for a smooth experience across all devices.  
+- Thoughtful handling of **edge cases** such as:  
+  - Empty task lists, with explanatory messages.
+  - Custom error pages for invalid URLs or unexpected actions.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🌟 Features  
 
-## Code scaffolding
+- **Task Management**: Create, edit, delete, and organize tasks.  
+- **Secure Authentication**: Login/logout functionality to protect your data.  
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices.  
+- **Edge Case Handling**: Intuitive messaging for empty states and error scenarios.  
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 🎨 What Sets It Apart  
 
-## Build
+This app isn't a simple reproduction of the playlist's content. I expanded on the foundational ideas with my own features and improvements to make it more robust, secure, and user-friendly.  
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+## 🔧 Technologies  
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Frontend**: Angular  
+- **Backend**: Node.js  
+- **Database**: MongoDB  
+- **Hosting**: Render
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## 🌐 Connect With Me  
 
-## Further help
+Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/ahmedbenchakhter/) to discuss this project or any other topics related to development!  
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+---
+
+## 💬 Feedback  
+
+Feedback is always welcome! Feel free to open an issue or contribute to the repository.
