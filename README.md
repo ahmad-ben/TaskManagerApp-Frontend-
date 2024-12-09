@@ -19,8 +19,6 @@
 
 This app isn't a simple reproduction of the playlist's content. I expanded on the foundational ideas with my own features and improvements to make it more robust, secure, and user-friendly.  
 
----
-
 ## 🔧 Technologies  
 
 - **Frontend**: Angular  
@@ -28,13 +26,9 @@ This app isn't a simple reproduction of the playlist's content. I expanded on th
 - **Database**: MongoDB  
 - **Hosting**: Render
 
----
-
 ## 🌐 Connect With Me  
 
 Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/ahmedbenchakhter/) to discuss this project or any other topics related to development!  
-
----
 
 ## 💬 Feedback  
 
