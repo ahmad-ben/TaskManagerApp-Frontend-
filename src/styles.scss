@@ -79,3 +79,8 @@ button.invalidInputState{
     border-color: $green;
   }
 }
+
+.ngx-toastr.toast-warning{
+  width: min(50%, 500px);
+  margin-left: auto;
+}

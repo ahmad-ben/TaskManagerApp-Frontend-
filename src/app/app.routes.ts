@@ -48,7 +48,6 @@ export function definedTheFirstPath():string {
   const JWTToken = localStorage.getItem('accessToken');
   const sessionToken = localStorage.getItem('refreshToken');
 
-  if(userId && JWTToken && sessionToken) return 'homePage/lists'
-  return 'login'
-
+  if(userId && JWTToken && sessionToken) return 'homePage/lists';
+  return 'login';
 }
