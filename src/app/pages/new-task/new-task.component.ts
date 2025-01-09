@@ -47,6 +47,8 @@ export class NewTaskComponent implements OnInit, AfterViewInit  {
     this.buttonClicked = true;
     if(newTaskForm.invalid) return;
 
+    // TODO LATER: ADD A SPINNER HERE.
+  
     this.taskService.createTask(this.listId, this.inputValue)
       .subscribe({
         next: (newTaskFromDB: TaskType) => {

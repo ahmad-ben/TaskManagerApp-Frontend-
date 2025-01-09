@@ -84,3 +84,18 @@ button.invalidInputState{
   width: min(50%, 500px);
   margin-left: auto;
 }
+
+.spinner{
+  height: 20px;
+  width: 20px;
+  border: 2px solid;
+  border-color: $dark-green transparent $dark-green transparent;
+  border-radius: 50%;
+  animation: spin 1.3s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

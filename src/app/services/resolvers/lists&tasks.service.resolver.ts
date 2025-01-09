@@ -18,13 +18,13 @@ export const listsAndTasksResolver: ResolveFn<Observable<(ListType[] | TaskType[
     const taskService = inject(TaskService);
     const toastr = inject(ToastrService);
     const router = inject(Router);
-    const spinner = inject(NgxSpinnerService);
+    // const spinner = inject(NgxSpinnerService);
     const listId = route.params['listId'];
     const arrayOfListsAndTasks : (ListType[] | TaskType[])[] = [];
-    const workingSpinners = inject(WorkingSpinnersService);
+    // const workingSpinners = inject(WorkingSpinnersService);
 
-    spinner.show('getListsAndTasks');
-    workingSpinners.spinnerStartsWorking('getListsAndTasks');
+    // spinner.show('getListsAndTasks');
+    // workingSpinners.spinnerStartsWorking('getListsAndTasks');
     return inject(ListService).getLists()
     .pipe(
       switchMap((listsArray: ListType[]) => {
@@ -36,8 +36,8 @@ export const listsAndTasksResolver: ResolveFn<Observable<(ListType[] | TaskType[
         return arrayOfListsAndTasks
       }),
       finalize(() => {
-          spinner.hide('getListsAndTasks');
-          workingSpinners.spinnerFinishesWorking('getListsAndTasks');
+          // spinner.hide('getListsAndTasks');
+          // workingSpinners.spinnerFinishesWorking('getListsAndTasks');
 
       })
     )

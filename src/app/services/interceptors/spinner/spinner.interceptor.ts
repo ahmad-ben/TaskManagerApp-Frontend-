@@ -17,6 +17,8 @@ export class SpinnerInterceptor implements HttpInterceptor {
   spinner = inject(NgxSpinnerService);
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    if(!(req.url.includes("signIn"))) return next.handle(req);
+
     this.workingSpinners.arrayOfWorkingSpinners$
       .pipe( first() )
       .subscribe({

@@ -5,10 +5,31 @@
   </h1>
 
   <ul *ngIf="listsArray.length > 0" class="listsMenu flex flex-col mt-[15px] grow overflow-y-auto pr-2 md:pr-6 lg:pr-8">
-    <a *ngFor="let list of listsArray" [routerLinkActive]="'activeList'" routerLink="/homePage/lists/{{list._id}}" class="taskHeader flex active items-center py-[10px] rounded-[5px] w-full text-[#5f5f5f] mb-[5px] px-[15px] hover:bg-customizeLight cursor-pointer active:bg-[#cff8ef] active:text-customizeDarkGreen">
+    <a 
+      *ngFor="let list of listsArray" 
+      [routerLinkActive]="'activeList'" 
+      routerLink="/homePage/lists/{{list._id}}" 
+      class="
+        taskHeader 
+        flex active items-center justify-between py-[10px] rounded-[5px] w-full 
+        text-[#5f5f5f] mb-[5px] px-[15px] hover:bg-customizeLight 
+        cursor-pointer active:bg-[#cff8ef] active:text-customizeDarkGreen
+      "
+      (click)="onLinkClick(list._id)"
+    >
       <p class="listTitle max-w-full">
         {{ list.title }}
       </p>
+
+      <!-- Spinner -->
+      <div 
+        *ngIf="loadingListId === list._id" 
+        class="spinnerHolder ml-2"
+      >
+        <!-- <div class="spinner-border w-4 h-4 border-2 border-t-transparent rounded-full"></div> -->
+        <div class="spinner"></div>
+      </div>
+
     </a>
   </ul>
 

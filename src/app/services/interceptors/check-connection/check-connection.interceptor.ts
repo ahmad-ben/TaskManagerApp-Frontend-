@@ -23,7 +23,6 @@ export class CheckConnectionInterceptor implements HttpInterceptor {
     };
 
     return next.handle(req);
-
   }
 
 }

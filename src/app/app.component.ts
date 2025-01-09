@@ -3,6 +3,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { WebRequestService } from './services/web/web-request.service';
+// import { WebRequestService } from './../web/web-request.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +19,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AppComponent implements OnInit {
   title = 'NoteItNow';
+
   toastr = inject(ToastrService);
+  webReqService = inject(WebRequestService);
 
   ngOnInit(){
     const notNewVisiter = sessionStorage.getItem("notNewVisiter");
@@ -33,5 +37,10 @@ export class AppComponent implements OnInit {
       );      
     };
 
-  }
+    console.log("HERE");
+    
+
+    return this.webReqService.get('test').subscribe();
+  };
+
 }

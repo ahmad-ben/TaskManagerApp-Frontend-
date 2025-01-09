@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { ListService } from 'src/app/services/lists/list.service';
 import { ListType } from 'src/app/shared/types/listType';
 
@@ -15,14 +15,30 @@ export class ListsComponent {
   @Input('listId') listId: string = '';
   @Input('listsArray') listsArray: ListType[] = [];
 
-  @Output('noteIconClicked') noteIconClickedInChild: EventEmitter<boolean> =
-    new EventEmitter();
-
   listService = inject(ListService);
   router = inject(Router);
 
+  loadingListId: string | null = null;
+
+  constructor() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.loadingListId = null; // Reset loading when navigation ends
+      }
+    });
+  }
+
+  @Output('noteIconClicked') noteIconClickedInChild: EventEmitter<boolean> =
+    new EventEmitter();
+
+
+
   noteIconClicked() {
     this.noteIconClickedInChild.emit();
+  };
+
+  onLinkClick(listId: string){
+    this.loadingListId = listId;
   }
 
   deleteList() {
