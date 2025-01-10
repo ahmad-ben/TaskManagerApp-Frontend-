@@ -37,9 +37,6 @@ export class AppComponent implements OnInit {
       );      
     };
 
-    console.log("HERE");
-    
-
     return this.webReqService.get('test').subscribe();
   };
 
