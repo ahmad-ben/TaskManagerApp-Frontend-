@@ -4,7 +4,6 @@ import { RouterOutlet } from '@angular/router';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { WebRequestService } from './services/web/web-request.service';
-// import { WebRequestService } from './../web/web-request.service';
 
 @Component({
   selector: 'app-root',

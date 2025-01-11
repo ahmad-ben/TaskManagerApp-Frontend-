@@ -45,6 +45,33 @@
   }
 }
 
+.trashIcon{
+  &.deletedTask{
+    animation: vibrate 1s ease-in-out infinite;
+  }
+};
+
+@keyframes vibrate {
+  0% {
+    opacity: .5; 
+    transform: translateX(0); 
+  }
+  25% {
+    transform: translateX(-3px); 
+  }
+  50% {
+    opacity: .25;
+    transform: translateX(0px);
+  }
+  75% {
+    transform: translateX(3px); 
+  }
+  100% {
+    opacity: .5; 
+    transform: translateX(0); 
+  }
+}
+
 .taskTitle{
   max-width: calc(100% - 80px);
 

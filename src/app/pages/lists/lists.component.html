@@ -22,13 +22,7 @@
       </p>
 
       <!-- Spinner -->
-      <div 
-        *ngIf="loadingListId === list._id" 
-        class="spinnerHolder ml-2"
-      >
-        <!-- <div class="spinner-border w-4 h-4 border-2 border-t-transparent rounded-full"></div> -->
-        <div class="spinner"></div>
-      </div>
+      <Spinner *ngIf="loadingListId === list._id" color="hsl(168, 100%, 20%)" />
 
     </a>
   </ul>
@@ -46,3 +40,5 @@
   </div>
 
 </div>
+
+<!-- ?? Sign in also can be hatted A lot in once -->

@@ -1,0 +1,13 @@
+.spinner{
+  border: 2px solid;
+  border-radius: 50%;
+  animation: spin 1.3s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ?? make it inline

@@ -1,7 +1,8 @@
 .activeList{
   background-color: hsl(0, 0%, 97%);
 }
-.taskIcon{
+
+.taskIcon{ //TODO LATER WHY THIS IS HERE
   transition: .3s;
   &.hiddenTaskIcon{
     scale: .5;

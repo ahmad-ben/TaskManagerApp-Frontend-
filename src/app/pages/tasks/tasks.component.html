@@ -16,7 +16,15 @@
         Tasks
       </h1>
 
-      <button (click)="dropdownVisibilityToggle()" type="button" class="dropDownButton flex justify-center items-center rounded-md px-3 py-1.5 border border-customizeGreen hover:shadow-md shadow-customizeLightGreen">
+      <button 
+        (click)="dropdownVisibilityToggle()" 
+        type="button" 
+        class="
+          dropDownButton flex justify-center items-center rounded-md px-3 py-1.5 
+          border border-customizeGreen hover:shadow-md 
+          shadow-customizeLightGreen
+        "
+      >
         <img
           [class.active]="dropdownVisibility" class="settingIcon"
           src="assets/icons/settingIcon.svg" alt="settingIcon"
@@ -38,17 +46,36 @@
 
     </header>
 
-    <h3 *ngIf="tasksArray.length == 0" class="noTaskInSelectedList grow text-xl text-center text-[#777]">There are no tasks here, click the add button to create new task.</h3>
+    <h3 
+      *ngIf="tasksArray.length == 0" 
+      class="noTaskInSelectedList grow text-xl text-center text-[#777]"
+    >There are no tasks here, click the add button to create new task.</h3>
 
-    <ul *ngIf="tasksArray.length > 0" class="tasksMenu flex flex-col gap-2 grow pr-2 overflow-y-auto">
+    <ul 
+      *ngIf="tasksArray.length > 0" 
+      class="tasksMenu flex flex-col gap-2 grow pr-2 overflow-y-auto"
+    >
       <li #taskLi [class.completed]="taskObj.completed" *ngFor="let taskObj of tasksArray" class="taskDescription bg-white py-2 px-2.5 rounded-md flex items-center gap-2 lg:py-4 lg:px-5">
         <p class="grow taskTitle" (click)="taskClicked(taskObj)">{{ taskObj.title }}</p>
         <img class="taskIcon p-1 border border-customizeGreen rounded w-8 h-8" [class.hiddenTaskIcon]="taskObj.completed" [routerLink]="'/lists/'+ listId + '/tasks/' + taskObj._id + '/editTask'" src="assets/icons/editIcon.svg" alt="trashIcon">
-        <img class="taskIcon p-1 border border-customizeGreen rounded w-8 h-8" [class.hiddenTaskIcon]="taskObj.completed" (click)="deleteTask($event, taskObj)" src="assets/icons/trashIcon.svg" alt="trashIcon">
+        <img 
+          class="taskIcon trashIcon p-1 border border-customizeGreen rounded w-8 h-8" 
+          [class.hiddenTaskIcon]="taskObj.completed" 
+          [class.deletedTask]="deletedTaskId === taskObj._id" 
+          (click)="deleteTask($event, taskObj)" 
+          src="assets/icons/trashIcon.svg" alt="trashIcon"
+        >
       </li>
     </ul>
 
-    <button class="bg-customizeGreen text-lg rounded-full p-2 w-10 min-w-[40px] h-10 min-h-[40px] flex justify-center items-center cursor-pointer text-white self-end" routerLink="/lists/{{listId}}/newTask">
+    <button 
+      class="
+        bg-customizeGreen text-lg rounded-full p-2 w-10 
+        min-w-[40px] h-10 min-h-[40px] 
+        flex justify-center items-center 
+        cursor-pointer text-white self-end
+      " routerLink="/lists/{{listId}}/newTask"
+    >
       <img class="w-[75%] h-[75%]" src="assets/icons/plusIcon.svg" alt="addIcon">
     </button>
 

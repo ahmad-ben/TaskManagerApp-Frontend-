@@ -10,14 +10,13 @@ export const listsResolver: ResolveFn<any> =
     const spinner = inject(NgxSpinnerService);
     const workingSpinners = inject(WorkingSpinnersService);
 
-    console.log("listsResolver resolver works.");
     spinner.show('getLists');
     workingSpinners.spinnerStartsWorking('getLists');
     return inject(ListService).getLists()
       .pipe(
         finalize(() => {
-            spinner.hide('getLists');
-            workingSpinners.spinnerFinishesWorking('getLists');
+          spinner.hide('getLists');
+          workingSpinners.spinnerFinishesWorking('getLists');
         })
       )
 

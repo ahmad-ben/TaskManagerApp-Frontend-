@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { TaskType } from 'src/app/shared/types/taskType';
 import { ListsComponent } from './../lists/lists.component';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'tasks',
@@ -20,6 +21,7 @@ import { ListsComponent } from './../lists/lists.component';
 export class TasksComponent {
   isMobile: Boolean = window.innerWidth < 640;
   dropdownVisibility: boolean = false;
+  deletedTaskId: string | null = null;
 
   @Input('listId') listId: string = '';
   @Input('tasksArray') tasksArray?: TaskType[];
@@ -44,7 +46,11 @@ export class TasksComponent {
 
   deleteTask(event: Event, taskDocument: TaskType) {
     event.stopPropagation();
-    this.taskService.deleteTask(taskDocument).subscribe({
+    this.deletedTaskId = taskDocument._id;
+
+    this.taskService.deleteTask(taskDocument).pipe(
+      finalize(() => this.deletedTaskId = null)
+    ).subscribe({
       next: (res: any) => {
         if(!this.tasksArray?.includes(taskDocument)) return;
         this.tasksArray = this.tasksArray

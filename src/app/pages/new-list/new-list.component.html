@@ -18,7 +18,12 @@
           required minlength="1" maxlength="50" checkWhiteSpace
         >
 
-        <div class="errorMessages" *ngIf="inputControlState.invalid && (inputControlState.dirty || inputControlState.touched || buttonClicked)">
+        <div 
+          class="errorMessages" 
+          *ngIf="
+            inputControlState.invalid && 
+            (inputControlState.dirty || inputControlState.touched || buttonClicked)
+          ">
 
           <span *ngIf="inputControlState.errors?.['required']">
             Name of the new list is required.
@@ -44,22 +49,35 @@
 
         <button
           type="button"
+          *ngIf="!isProcessing"
           class="p-2 text-base text-white bg-customizeDarkGreen rounded-lg outline-0"
           routerLink="/homePage/lists"
-          >
+        >
           Cancel
         </button>
 
         <button
           type="submit"
-          class="p-2 ml-2 text-base text-white bg-customizeGreen rounded-lg outline-0" [class.invalidInputState]="inputControlState.invalid"
+          class="
+            p-2 ml-2 text-base text-white bg-customizeGreen 
+            rounded-lg outline-0" 
+            [class.invalidInputState]="inputControlState.invalid"
+            [disabled]="isProcessing"
         >
-          Create
+          <ng-container *ngIf="!isProcessing">
+            Create
+          </ng-container>
+          <ng-container *ngIf="isProcessing">
+            <Spinner />
+          </ng-container>
         </button>
 
       </div>
 
-      <div class="errorMessages text-right" *ngIf="errorMessage && inputControlState.invalid" > {{ errorMessage }} </div>
+      <div 
+        class="errorMessages text-right" 
+        *ngIf="errorMessage && inputControlState.invalid"
+      > {{ errorMessage }} </div>
 
     </form>
 
