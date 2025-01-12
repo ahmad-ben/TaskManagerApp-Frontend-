@@ -3,6 +3,8 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject } from 
 import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CancelButtonComponent } from 'src/app/components/buttons/cancel-button/cancel-button.component';
+import { ChangeButtonComponent } from 'src/app/components/buttons/change-button/change-button.component';
 import { CheckWhiteSpaceDirective } from 'src/app/directives/whiteSpace/check-white-space.directive';
 import { ListService } from 'src/app/services/lists/list.service';
 import { lastErrorHandlerFun } from 'src/app/shared/functions/lastErrorHandlerFun';
@@ -15,6 +17,8 @@ import { ErrorBodyType } from 'src/app/shared/types/errorBodyResponse';
     CommonModule,
     FormsModule,
     RouterLink,
+    ChangeButtonComponent,
+    CancelButtonComponent,
     CheckWhiteSpaceDirective
   ],
   templateUrl: './edit-list.component.html',
@@ -26,6 +30,7 @@ export class EditListComponent implements OnInit, AfterViewInit {
   buttonClicked: boolean = false;
   listId: string = '';
   errorMessage: string = '';
+  isProcessing: boolean = false;
 
   @ViewChild('inputControlState', { read: ElementRef }) inputControlState?:ElementRef<HTMLInputElement>;
 
@@ -47,6 +52,7 @@ export class EditListComponent implements OnInit, AfterViewInit {
     this.buttonClicked = true;
     if(editedListForm.invalid) return;
 
+    this.isProcessing = true;
     this.listService.editList(this.listId, this.inputValue)
       .subscribe({
         next: (res) => {
@@ -56,6 +62,7 @@ export class EditListComponent implements OnInit, AfterViewInit {
           this.errorMessage = lastErrorHandlerFun(
             error, this.router, this.toastr
           ) || '';
+          this.isProcessing = false;
         },
       });
 

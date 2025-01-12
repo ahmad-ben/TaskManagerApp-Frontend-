@@ -47,30 +47,15 @@
 
       <div class="buttons flex justify-end items-center">
 
-        <button
-          type="button"
-          *ngIf="!isProcessing"
-          class="p-2 text-base text-white bg-customizeDarkGreen rounded-lg outline-0"
-          routerLink="/homePage/lists"
-        >
-          Cancel
-        </button>
+        <cancel-button 
+          path="/homePage/lists" 
+          [isProcessing]="isProcessing"
+        />
 
-        <button
-          type="submit"
-          class="
-            p-2 ml-2 text-base text-white bg-customizeGreen 
-            rounded-lg outline-0" 
-            [class.invalidInputState]="inputControlState.invalid"
-            [disabled]="isProcessing"
-        >
-          <ng-container *ngIf="!isProcessing">
-            Create
-          </ng-container>
-          <ng-container *ngIf="isProcessing">
-            <Spinner />
-          </ng-container>
-        </button>
+        <change-button 
+          buttonAction="Create" [isProcessing]="isProcessing" 
+          [invalidInputVal]="inputControlState.invalid" 
+        />
 
       </div>
 

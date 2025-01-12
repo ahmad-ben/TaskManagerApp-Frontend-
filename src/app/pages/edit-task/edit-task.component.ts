@@ -5,6 +5,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { finalize, switchMap } from 'rxjs';
+import { CancelButtonComponent } from 'src/app/components/buttons/cancel-button/cancel-button.component';
+import { ChangeButtonComponent } from 'src/app/components/buttons/change-button/change-button.component';
 import { CheckWhiteSpaceDirective } from 'src/app/directives/whiteSpace/check-white-space.directive';
 import { WorkingSpinnersService } from 'src/app/services/spinners-state/working-spinner.service';
 import { TaskService } from 'src/app/services/tasks/task.service';
@@ -19,6 +21,8 @@ import { TaskType } from 'src/app/shared/types/taskType';
     CommonModule,
     RouterLink,
     FormsModule,
+    ChangeButtonComponent,
+    CancelButtonComponent,
     CheckWhiteSpaceDirective
   ],
   templateUrl: './edit-task.component.html',
@@ -33,6 +37,7 @@ export class EditTaskComponent implements OnInit, AfterViewInit {
   taskId: string = '';
   taskObj?: TaskType;
   errorMessage: string = '';
+  isProcessing : boolean = false;
 
   @ViewChild('inputControlState', { read: ElementRef }) inputControlState?:ElementRef<HTMLInputElement>;
 
@@ -56,8 +61,8 @@ export class EditTaskComponent implements OnInit, AfterViewInit {
 
     this.buttonClicked = true;
     if(editedTaskForm.invalid) return;
-    this.spinner.show('editTask');
-    this.workingSpinners.spinnerStartsWorking('editTask');
+
+    this.isProcessing = true;
 
     this.taskService.getTask(this.listId, this.taskId)
       .pipe(
@@ -78,6 +83,7 @@ export class EditTaskComponent implements OnInit, AfterViewInit {
           this.errorMessage = lastErrorHandlerFun(
             error, this.router, this.toastr
           ) || '';
+          this.isProcessing = false;
         }
       });
 

@@ -53,6 +53,9 @@ h1{
   ::-webkit-scrollbar { width: 4px; }
 }
 
+button{
+  transition: .5s;
+}
 
 button.invalidInputState{
   background-color: grey;

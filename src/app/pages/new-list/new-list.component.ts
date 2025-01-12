@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { CancelButtonComponent } from 'src/app/components/buttons/cancel-button/cancel-button.component';
+import { ChangeButtonComponent } from 'src/app/components/buttons/change-button/change-button.component';
 import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
 import { CheckWhiteSpaceDirective } from 'src/app/directives/whiteSpace/check-white-space.directive';
 import { ListService } from 'src/app/services/lists/list.service';
@@ -16,6 +18,8 @@ import { ErrorBodyType } from 'src/app/shared/types/errorBodyResponse';
     RouterLink,
     FormsModule,
     SpinnerComponent,
+    ChangeButtonComponent,
+    CancelButtonComponent,
     CheckWhiteSpaceDirective
   ],
   templateUrl: './new-list.component.html',

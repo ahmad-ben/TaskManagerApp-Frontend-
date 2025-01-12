@@ -1,0 +1,14 @@
+<button
+  type="submit"
+  class=
+    "p-2 ml-2 text-base text-white bg-customizeGreen rounded-lg outline-0" 
+    [class.invalidInputState]="invalidInputVal"
+    [disabled]="isProcessing"
+>
+  <ng-container *ngIf="isProcessing">
+    <Spinner />
+  </ng-container>
+  <ng-container *ngIf="!isProcessing">
+    {{buttonAction}}
+  </ng-container>
+</button>
