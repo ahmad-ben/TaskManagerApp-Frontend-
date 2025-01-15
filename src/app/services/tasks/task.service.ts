@@ -11,7 +11,6 @@ export class TaskService {
   webReqService = inject(WebRequestService);
 
   getTasks(listId: string){
-
     return this.webReqService.get(`lists/${listId}/tasks`) as Observable<TaskType[]>;
   }
 

@@ -30,7 +30,9 @@ export class NewListComponent implements AfterViewInit {
   inputValue: string = "";
   buttonClicked: boolean = false;
   errorMessage: string = '';
+
   isProcessing: boolean = false;
+  isCanceling: boolean = false;
 
   @ViewChild('inputControlState', { read: ElementRef }) inputControlState?:ElementRef<HTMLInputElement>;
 

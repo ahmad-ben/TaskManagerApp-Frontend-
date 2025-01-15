@@ -45,10 +45,14 @@
         <cancel-button 
           path="/homePage/lists/{{ listId }}" 
           [isProcessing]="isProcessing"
+          [isCanceling]="isCanceling"
+          (cancel)="isCanceling = true"
         />
 
         <change-button 
-          buttonAction="Edit" [isProcessing]="isProcessing" 
+          buttonAction="Edit" 
+          [isProcessing]="isProcessing"
+          [isCanceling]="isCanceling" 
           [invalidInputVal]="inputControlState.invalid" 
         />
 

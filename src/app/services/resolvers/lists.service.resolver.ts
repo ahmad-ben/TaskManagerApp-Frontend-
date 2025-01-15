@@ -1,7 +1,7 @@
 import { inject } from "@angular/core";
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
-import { finalize } from "rxjs";
+import { catchError, finalize, of } from "rxjs";
 import { ListService } from "../lists/list.service";
 import { WorkingSpinnersService } from "../spinners-state/working-spinner.service";
 
@@ -14,6 +14,7 @@ export const listsResolver: ResolveFn<any> =
     workingSpinners.spinnerStartsWorking('getLists');
     return inject(ListService).getLists()
       .pipe(
+        catchError(() => of([])),
         finalize(() => {
           spinner.hide('getLists');
           workingSpinners.spinnerFinishesWorking('getLists');

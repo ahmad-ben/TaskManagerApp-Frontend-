@@ -37,7 +37,9 @@ export class EditTaskComponent implements OnInit, AfterViewInit {
   taskId: string = '';
   taskObj?: TaskType;
   errorMessage: string = '';
-  isProcessing : boolean = false;
+
+  isProcessing: boolean = false;
+  isCanceling: boolean = false;
 
   @ViewChild('inputControlState', { read: ElementRef }) inputControlState?:ElementRef<HTMLInputElement>;
 

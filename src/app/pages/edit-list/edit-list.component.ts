@@ -30,7 +30,9 @@ export class EditListComponent implements OnInit, AfterViewInit {
   buttonClicked: boolean = false;
   listId: string = '';
   errorMessage: string = '';
+
   isProcessing: boolean = false;
+  isCanceling: boolean = false;
 
   @ViewChild('inputControlState', { read: ElementRef }) inputControlState?:ElementRef<HTMLInputElement>;
 
@@ -48,7 +50,6 @@ export class EditListComponent implements OnInit, AfterViewInit {
   }
 
   editList(editedListForm: NgForm){
-
     this.buttonClicked = true;
     if(editedListForm.invalid) return;
 
@@ -69,4 +70,3 @@ export class EditListComponent implements OnInit, AfterViewInit {
   }
 
 }
-

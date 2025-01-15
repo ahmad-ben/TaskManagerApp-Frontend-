@@ -50,11 +50,15 @@
         <cancel-button 
           path="/homePage/lists" 
           [isProcessing]="isProcessing"
+          [isCanceling]="isCanceling"
+          (cancel)="isCanceling = true"
         />
 
         <change-button 
-          buttonAction="Create" [isProcessing]="isProcessing" 
-          [invalidInputVal]="inputControlState.invalid" 
+        buttonAction="Create" 
+        [isProcessing]="isProcessing"
+        [isCanceling]="isCanceling" 
+        [invalidInputVal]="inputControlState.invalid" 
         />
 
       </div>

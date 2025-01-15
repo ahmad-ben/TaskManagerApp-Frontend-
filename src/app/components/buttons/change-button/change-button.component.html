@@ -3,6 +3,7 @@
   class=
     "p-2 ml-2 text-base text-white bg-customizeGreen rounded-lg outline-0" 
     [class.invalidInputState]="invalidInputVal"
+    *ngIf="!isCanceling"
     [disabled]="isProcessing"
 >
   <ng-container *ngIf="isProcessing">

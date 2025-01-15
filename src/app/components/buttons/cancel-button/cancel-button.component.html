@@ -2,7 +2,14 @@
   type="button"
   class="p-2 text-base text-white bg-customizeDarkGreen rounded-lg outline-0"
   *ngIf="!isProcessing"
+  [disabled]="isCanceling"
+  (click)="cancelButtonClicked()"
   [routerLink]="path"
 >
-Cancel
+  <ng-container *ngIf="isCanceling">
+    <Spinner />
+  </ng-container>
+  <ng-container *ngIf="!isCanceling">
+    Cancel
+  </ng-container>
 </button>
