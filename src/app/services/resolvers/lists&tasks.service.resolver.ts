@@ -16,7 +16,7 @@ export const listsAndTasksResolver: ResolveFn<Observable<(ListType[] | TaskType[
   ) => {
 
     const taskService = inject(TaskService);
-    const toastr = inject(ToastrService);
+    const toastr = inject(ToastrService); //?? we don't use it
     const router = inject(Router);
     const listId = route.params['listId'];
     const arrayOfListsAndTasks : (ListType[] | TaskType[])[] = [];

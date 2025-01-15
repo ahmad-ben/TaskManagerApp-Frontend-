@@ -60,6 +60,5 @@ export class HomePageComponent implements OnInit, AfterViewInit{
   logoutButtonClicked() {
     this.authService.logout();
   }
-
 }
 
