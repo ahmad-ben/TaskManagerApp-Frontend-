@@ -1,0 +1,9 @@
+<button 
+  (click)="redirectButtonClicked()" 
+  class="
+    bg-white text-customizeGreen w-fit flex items-center justify-between 
+    gap-1 px-1.5 py-1.5 md:gap-3 self-end md:py-2 md:px-3 rounded-md my-2 mx-3
+  ">
+  <img [src]="buttonImageUrl" [alt]="buttonDescription">
+  <span class="hidden md:inline-block">{{buttonText}}</span>
+</button>

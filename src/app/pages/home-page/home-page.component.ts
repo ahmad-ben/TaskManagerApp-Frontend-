@@ -6,6 +6,7 @@ import { ListType } from 'src/app/shared/types/listType';
 import { TaskType } from 'src/app/shared/types/taskType';
 import { ListsComponent } from '../lists/lists.component';
 import { TasksComponent } from '../tasks/tasks.component';
+import { TopNavbarComponent } from "../../components/top-navbar/top-navbar.component";
 
 @Component({
   selector: 'app-home-page',
@@ -14,7 +15,8 @@ import { TasksComponent } from '../tasks/tasks.component';
     CommonModule,
     ListsComponent,
     TasksComponent,
-  ],
+    TopNavbarComponent
+],
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
@@ -28,7 +30,6 @@ export class HomePageComponent implements OnInit, AfterViewInit{
   showHiddenSidebar: boolean = false;
 
   activateRoute = inject(ActivatedRoute);
-  authService = inject(AuthService);
 
   ngOnInit() {
     this.activateRoute.params.subscribe({
@@ -55,10 +56,6 @@ export class HomePageComponent implements OnInit, AfterViewInit{
 
   noteIconClicked() {
     this.showHiddenSidebar = !this.showHiddenSidebar;
-  }
-
-  logoutButtonClicked() {
-    this.authService.logout();
   }
 }
 
