@@ -1,0 +1,10 @@
+<button 
+  class="block w-full px-4 py-2 hover:bg-gray-100"
+  [ngClass]="{'text-center': isDeleting, 'text-start': !isDeleting}"
+  (click)="deleteBtnClicked()"
+>
+  <ng-container *ngIf="isDeleting; else showText"> 
+    <spinner color="hsl(168, 100%, 20%)" /> 
+  </ng-container>
+  <ng-template #showText>{{ deleteText }}</ng-template>
+</button>

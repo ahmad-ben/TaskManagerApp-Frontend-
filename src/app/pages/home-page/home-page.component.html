@@ -8,7 +8,12 @@
 
       <lists
         [class.visibleSidebar]="showHiddenSidebar"
-        class="sidebar absolute z-10 h-full bg-white py-4 pl-4 rounded-l-lg sm:w-1/5 sm:static sm:rounded-l-lg md:py-6 md:pl-6 lg:py-8 lg:pl-8"
+        class="
+          sidebar absolute z-10 h-full bg-white py-4 pl-4 rounded-l-lg 
+          sm:w-1/5 sm:static sm:rounded-l-lg md:py-6 md:pl-6 lg:py-8 lg:pl-8
+        "
+        [dropdownVisibility] ="dropdownVisibility"
+        (changeDropdownVisibility)="changeDropdownVisibility($event)"
         #listsComponent
         (noteIconClicked)="noteIconClicked()"
         [listId]="listId"
@@ -16,9 +21,15 @@
       ></lists>
 
       <tasks
-        class="bg-customizeLight flex grow p-4 md:p-6 lg:p-8 rounded-r-lg sm:rounded-r-lg overflow-y-hidden"
+        class="
+          bg-customizeLight flex grow p-4 md:p-6 lg:p-8 rounded-r-lg 
+          sm:rounded-r-lg overflow-y-hidden
+        "
+        [dropdownVisibility] ="dropdownVisibility"
         #tasksComponent
         [listsComponent]="listsComponent"
+        (changeDropdownVisibility)="changeDropdownVisibility($event)"
+        (deleteList)="deleteList()"
         [tasksArray]="tasksArray"
         [listId]="listId"
       ></tasks>

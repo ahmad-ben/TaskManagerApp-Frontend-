@@ -1,6 +1,6 @@
 <div class="tasksComponent flex grow flex-col overflow-y-hidden">
 
-  <h3 class="noListSelected text-xl text-center text-[#777]" *ngIf="!tasksArray">
+  <h3 class="noListSelected text-xl text-center text-[#777]" *ngIf="!listId">
     <ng-container *ngIf="!isMobile; else isAMobile">
       Please select a list from the sidebar or create new one.
     </ng-container>
@@ -9,7 +9,7 @@
     </ng-template>
   </h3>
 
-  <div class="listSelected grow flex flex-col gap-2 overflow-y-hidden" *ngIf="tasksArray">
+  <div class="listSelected grow flex flex-col gap-2 overflow-y-hidden" *ngIf="tasksArray && listId">
 
     <header class="flex items-center justify-between relative gap-1">
       <h1 class="text-customizeGreen">
@@ -32,14 +32,29 @@
       </button>
 
       <div
-        [class.hidden]="!dropdownVisibility" class="dropDown z-10 bg-white divide-y divide-gray-100 rounded-lg shadow absolute w-28"
+        [class.hidden]="!dropdownVisibility" 
+        class="
+          dropDown z-10 bg-white divide-y divide-gray-100 w-36
+          rounded-lg shadow absolute right-0 top-[calc(100%+5px)]
+        "
       >
-          <ul class="py-2 text-sm text-gray-700">
-            <li class="cursor-pointer" routerLink="/lists/{{ listId }}/editList">
-              <p class="px-4 py-2 hover:bg-gray-100">Edit list</p>
+          <ul class="py-2 px-1 text-sm text-gray-700">
+            <li>
+              <a class="block px-4 py-2 hover:bg-gray-100" routerLink="/lists/{{ listId }}/editList">Edit list</a>
             </li>
-            <li class="cursor-pointer" (click)="deleteList()">
-              <p class="px-4 py-2 hover:bg-gray-100">Delete list</p>
+            <li *ngIf="tasksArray.length > 0">
+              <delete-button 
+                deleteText="Delete all tasks"
+                (btnClick)="deleteAllTasks()"
+                [isDeleting]="isLoading"
+              />
+            </li>
+            <li>
+              <delete-button 
+                deleteText="Delete list"
+                (btnClick)="deleteList()"
+                [isDeleting]="isLoading"
+              />
             </li>
           </ul>
       </div>

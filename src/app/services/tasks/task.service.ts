@@ -15,7 +15,6 @@ export class TaskService {
   }
 
   getTask(listId: string, taskId:  string){
-
     return this.webReqService.get(`lists/${listId}/tasks/${taskId}`) as Observable<TaskType>;
   }
 
@@ -30,6 +29,10 @@ export class TaskService {
       `lists/${taskDocument._listId}/tasks/${taskDocument._id}`,
       payload
     ) as Observable<TaskType>;
+  }
+
+  deleteAllTasks(listId: string){
+    return this.webReqService.delete(`lists/${listId}/tasks`); //Lists go out?? A lot isn't?
   }
 
   deleteTask(taskDocument: TaskType){

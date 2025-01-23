@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, Input, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { TaskType } from 'src/app/shared/types/taskType';
 import { ListsComponent } from './../lists/lists.component';
 import { finalize } from 'rxjs';
+import { DeleteButtonComponent } from "../../components/buttons/delete-button/delete-button.component";
 
 @Component({
   selector: 'tasks',
@@ -12,27 +13,46 @@ import { finalize } from 'rxjs';
   imports: [
     CommonModule,
     RouterLink,
-    ListsComponent
-  ],
+    DeleteButtonComponent
+],
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
 })
 
 export class TasksComponent {
   isMobile: Boolean = window.innerWidth < 640;
-  dropdownVisibility: boolean = false;
   deletedTaskId: string | null = null;
 
   @Input('listId') listId: string = '';
   @Input('tasksArray') tasksArray?: TaskType[];
   @Input('listsComponent') listsCom!: ListsComponent;
+  @Input('dropdownVisibility') dropdownVisibility!: boolean;
+
+  @Output('changeDropdownVisibility') changeDropdownVisibility = new EventEmitter();
+  @Output('deleteList') deleteListEvent = new EventEmitter();
+
+  // Represent if a HTTP request is in progress in general like create, update, delete.
+  isLoading: boolean = false;
 
   router = inject(Router);
   taskService = inject(TaskService);
   changeDetectorRef = inject(ChangeDetectorRef);
 
   deleteList(){
-    this.listsCom.deleteList();
+    this.isLoading = true;
+    this.deleteListEvent.emit();
+  }
+
+  deleteAllTasks() {
+    this.isLoading = true;
+    this.taskService.deleteAllTasks(this.listId)
+    .pipe( finalize(() => {
+      this.isLoading = false;
+      this.changeDropdownVisibility.emit(false);
+    }) )
+    .subscribe({
+      next: (res: any) => this.tasksArray = []
+    });
   }
 
   taskClicked(taskDocument: TaskType) {
@@ -60,7 +80,7 @@ export class TasksComponent {
   }
 
   dropdownVisibilityToggle() {
-    this.dropdownVisibility = !this.dropdownVisibility;
+    this.changeDropdownVisibility.emit(!this.dropdownVisibility);
   }
 
   sortTasksArray(tasksArray: TaskType[] | undefined) {

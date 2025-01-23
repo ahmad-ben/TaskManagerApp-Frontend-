@@ -20,7 +20,6 @@ export class ServerErrorsInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
 
       catchError((httpErrorRes: HttpErrorResponse) => {
-
         if(httpErrorRes.status === undefined) return throwError(() => httpErrorRes);
 
         this.toastr.error('Something went wrong.', 'Error');
