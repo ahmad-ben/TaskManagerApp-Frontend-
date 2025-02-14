@@ -6,6 +6,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorBodyType } from 'src/app/shared/types/errorBodyResponse';
 import { AuthService } from './../../services/auth/auth.service';
+import { showSuccessToaster } from 'src/app/shared/functions/showSuccessToaster';
 
 @Component({
   selector: 'app-login',
@@ -66,8 +67,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
     )
       .subscribe({
         next: (res: HttpResponse<any>) => {
-          this.toastr.success( 'Login Success!', 'Welcome.');
           this.router.navigateByUrl('/homePage/lists');
+          showSuccessToaster(this, "Login Success!", "Welcome.");
         },
         error: (error: ErrorBodyType) => {
           this.errorMessage = error.message;

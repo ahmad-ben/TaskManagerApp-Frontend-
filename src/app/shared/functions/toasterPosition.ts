@@ -1,4 +1,4 @@
 export function toasterPosition(){
-  if(window.innerWidth < 640) return 'toast-top-full-width';
+  if(window.innerWidth < 400) return 'toast-top-full-width';
   return 'toast-top-right';
 }

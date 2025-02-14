@@ -1,23 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { CancelButtonComponent } from 'src/app/components/buttons/cancel-button/cancel-button.component';
 import { ChangeButtonComponent } from 'src/app/components/buttons/change-button/change-button.component';
-import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
 import { CheckWhiteSpaceDirective } from 'src/app/directives/whiteSpace/check-white-space.directive';
 import { ListService } from 'src/app/services/lists/list.service';
 import { ErrorBodyType } from 'src/app/shared/types/errorBodyResponse';
-
+import { ToastrService } from 'ngx-toastr';  
+import { showSuccessToaster } from 'src/app/shared/functions/showSuccessToaster';
 
 @Component({
   selector: 'app-new-list',
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink,
     FormsModule,
-    SpinnerComponent,
     ChangeButtonComponent,
     CancelButtonComponent,
     CheckWhiteSpaceDirective
@@ -34,10 +32,12 @@ export class NewListComponent implements AfterViewInit {
   isProcessing: boolean = false;
   isCanceling: boolean = false;
 
+  
   @ViewChild('inputControlState', { read: ElementRef }) inputControlState?:ElementRef<HTMLInputElement>;
-
+  
   listService = inject(ListService);
   route = inject(Router);
+  toastr = inject(ToastrService);
 
   ngAfterViewInit(){
     this.inputControlState?.nativeElement.focus();
@@ -51,8 +51,10 @@ export class NewListComponent implements AfterViewInit {
     this.isProcessing = true;
     this.listService.createList(this.inputValue)
       .subscribe({
-        next: (newListFromDB: any) => 
-          this.route.navigateByUrl(`/homePage/lists/${newListFromDB._id}`),
+        next: (newListFromDB: any) => {
+          this.route.navigateByUrl(`/homePage/lists/${newListFromDB._id}`)
+          showSuccessToaster(this, "", "New List Added");
+        },
         error: (error: ErrorBodyType) => {
           this.errorMessage = error.message;
           this.isProcessing = false;

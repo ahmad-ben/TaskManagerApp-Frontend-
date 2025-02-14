@@ -8,6 +8,7 @@ import { ChangeButtonComponent } from 'src/app/components/buttons/change-button/
 import { CheckWhiteSpaceDirective } from 'src/app/directives/whiteSpace/check-white-space.directive';
 import { ListService } from 'src/app/services/lists/list.service';
 import { lastErrorHandlerFun } from 'src/app/shared/functions/lastErrorHandlerFun';
+import { showSuccessToaster } from 'src/app/shared/functions/showSuccessToaster';
 import { ErrorBodyType } from 'src/app/shared/types/errorBodyResponse';
 
 @Component({
@@ -57,6 +58,7 @@ export class EditListComponent implements OnInit, AfterViewInit {
     this.listService.editList(this.listId, this.inputValue)
       .subscribe({
         next: (res) => {
+          showSuccessToaster(this, "", "List Successfully Edited.")
           this.router.navigateByUrl(`homePage/lists/${this.listId}`)
         },
         error: (error: ErrorBodyType) => {

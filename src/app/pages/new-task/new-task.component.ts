@@ -8,6 +8,7 @@ import { ChangeButtonComponent } from 'src/app/components/buttons/change-button/
 import { CheckWhiteSpaceDirective } from 'src/app/directives/whiteSpace/check-white-space.directive';
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { lastErrorHandlerFun } from 'src/app/shared/functions/lastErrorHandlerFun';
+import { showSuccessToaster } from 'src/app/shared/functions/showSuccessToaster';
 import { ErrorBodyType } from 'src/app/shared/types/errorBodyResponse';
 import { TaskType } from 'src/app/shared/types/taskType';
 
@@ -60,6 +61,7 @@ export class NewTaskComponent implements OnInit, AfterViewInit  {
       .subscribe({
         next: (newTaskFromDB: TaskType) => {
           this.router.navigateByUrl(`/homePage/lists/${newTaskFromDB._listId}`);
+          showSuccessToaster(this, "","New Task Added");
         },
         error: (error: ErrorBodyType) => {
           this.errorMessage = lastErrorHandlerFun(
