@@ -9,6 +9,7 @@ import { ListService } from 'src/app/services/lists/list.service';
 import { ErrorBodyType } from 'src/app/shared/types/errorBodyResponse';
 import { ToastrService } from 'ngx-toastr';  
 import { showSuccessToaster } from 'src/app/shared/functions/showSuccessToaster';
+import { AddEditLayoutComponent } from "../../components/add-edit-layout/add-edit-layout.component";
 
 @Component({
   selector: 'app-new-list',
@@ -18,8 +19,9 @@ import { showSuccessToaster } from 'src/app/shared/functions/showSuccessToaster'
     FormsModule,
     ChangeButtonComponent,
     CancelButtonComponent,
-    CheckWhiteSpaceDirective
-  ],
+    CheckWhiteSpaceDirective,
+    AddEditLayoutComponent
+],
   templateUrl: './new-list.component.html',
   styleUrls: ['./new-list.component.scss']
 })

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CancelButtonComponent } from 'src/app/components/buttons/cancel-button/cancel-button.component';
 import { ChangeButtonComponent } from 'src/app/components/buttons/change-button/change-button.component';
@@ -11,18 +11,19 @@ import { lastErrorHandlerFun } from 'src/app/shared/functions/lastErrorHandlerFu
 import { showSuccessToaster } from 'src/app/shared/functions/showSuccessToaster';
 import { ErrorBodyType } from 'src/app/shared/types/errorBodyResponse';
 import { TaskType } from 'src/app/shared/types/taskType';
+import { AddEditLayoutComponent } from "../../components/add-edit-layout/add-edit-layout.component";
 
 @Component({
   selector: 'app-new-task',
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink,
     FormsModule,
     ChangeButtonComponent,
     CancelButtonComponent,
-    CheckWhiteSpaceDirective
-  ],
+    CheckWhiteSpaceDirective,
+    AddEditLayoutComponent
+],
   templateUrl: './new-task.component.html',
   styleUrls: ['./new-task.component.scss']
 })

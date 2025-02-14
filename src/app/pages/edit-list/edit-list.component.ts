@@ -10,6 +10,7 @@ import { ListService } from 'src/app/services/lists/list.service';
 import { lastErrorHandlerFun } from 'src/app/shared/functions/lastErrorHandlerFun';
 import { showSuccessToaster } from 'src/app/shared/functions/showSuccessToaster';
 import { ErrorBodyType } from 'src/app/shared/types/errorBodyResponse';
+import { AddEditLayoutComponent } from "../../components/add-edit-layout/add-edit-layout.component";
 
 @Component({
   selector: 'app-edit-list',
@@ -20,8 +21,9 @@ import { ErrorBodyType } from 'src/app/shared/types/errorBodyResponse';
     RouterLink,
     ChangeButtonComponent,
     CancelButtonComponent,
-    CheckWhiteSpaceDirective
-  ],
+    CheckWhiteSpaceDirective,
+    AddEditLayoutComponent
+],
   templateUrl: './edit-list.component.html',
   styleUrls: ['./edit-list.component.scss']
 })

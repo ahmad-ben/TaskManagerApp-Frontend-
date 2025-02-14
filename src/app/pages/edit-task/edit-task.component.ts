@@ -14,6 +14,7 @@ import { lastErrorHandlerFun } from 'src/app/shared/functions/lastErrorHandlerFu
 import { showSuccessToaster } from 'src/app/shared/functions/showSuccessToaster';
 import { ErrorBodyType } from 'src/app/shared/types/errorBodyResponse';
 import { TaskType } from 'src/app/shared/types/taskType';
+import { AddEditLayoutComponent } from "../../components/add-edit-layout/add-edit-layout.component";
 
 @Component({
   selector: 'app-edit-task',
@@ -23,8 +24,9 @@ import { TaskType } from 'src/app/shared/types/taskType';
     FormsModule,
     ChangeButtonComponent,
     CancelButtonComponent,
-    CheckWhiteSpaceDirective
-  ],
+    CheckWhiteSpaceDirective,
+    AddEditLayoutComponent
+],
   templateUrl: './edit-task.component.html',
   styleUrls: ['./edit-task.component.scss']
 })
