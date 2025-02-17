@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { WebRequestService } from './services/web/web-request.service';
+import { MenusStateService } from './services/subjects/menus-state.service';
+import { merge, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +23,7 @@ export class AppComponent implements OnInit {
 
   toastr = inject(ToastrService);
   webReqService = inject(WebRequestService);
+  menusStateService = inject(MenusStateService);
 
   ngOnInit(){
     const notNewVisiter = sessionStorage.getItem("notNewVisiter");
@@ -38,5 +41,11 @@ export class AppComponent implements OnInit {
 
     return this.webReqService.get('test').subscribe();
   };
+
+  @HostListener('document:click', ['$event'])
+  onKeyDown(event: MouseEvent) {
+    console.log("onKeyDown", event.target);
+    this.menusStateService.closeAllMenus();
+  }
 
 }

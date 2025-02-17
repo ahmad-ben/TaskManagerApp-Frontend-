@@ -8,24 +8,64 @@
       (btnClicked)="visitLink('Test')" 
     /> -->
 
-    <redirect-button
-      buttonText="Source"
-      buttonImageUrl="assets/icons/githubIcon.svg"
-      buttonDescription="Github Icon."
-      (btnClicked)="visitLink('https://github.com/ahmad-ben/TaskManagerApp-Frontend-')" 
-    />
+    <div class="menuWrapper relative">
+      <button 
+        (click)="dropdownVisibilityToggle($event)" 
+        type="button" 
+        class="
+          bg-white text-customizeGreen flex items-center justify-between 
+          gap-1 px-1.5 py-1.5 md:gap-3 self-end md:py-2 md:px-3 rounded-md my-2 mx-3
+        "
+      >
+        <img
+          [class.active]="(menusStateService.reposSourcesMenuState$ | async)" 
+          class="githubIcon"
+          src="assets/icons/githubIcon.svg" alt="githubIcon"
+        >
+        <span class="hidden md:inline-block">Repos</span>
+      </button>
+
+      <div
+        [class.hidden]="!(menusStateService.reposSourcesMenuState$ | async)" 
+        class="
+          dropDown z-10 bg-white divide-y divide-gray-100
+          rounded-lg shadow absolute right-0 top-full
+        "
+      >
+        <ul class="py-2 px-1 text-sm text-gray-700">
+          <li class="block p-2 hover:bg-gray-100">
+            <link-component
+              linkUrl="https://github.com/ahmad-ben/TaskManagerApp-Frontend-"
+              imageSource ="assets/icons/repoIcon.svg"
+              imageAltText ="RepoIcon."
+              linkText ="Frontend Source"
+            />
+          </li>
+          <li class="block px-4 py-2 hover:bg-gray-100">
+            <link-component
+              linkUrl="https://github.com/ahmad-ben/TaskManagerApp-Backend-"
+              imageSource ="assets/icons/repoIcon.svg"
+              imageAltText ="RepoIcon."
+              linkText ="Backend Source"
+            />
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
 
     <redirect-button
       buttonText="Profile"
       buttonImageUrl="assets/icons/linkedinIcon.svg"
-      buttonDescription="LinkedIn Icon."
+      buttonDescription="LinkedInIcon."
       (btnClicked)="visitLink('https://www.linkedin.com/in/ahmedbenchakhter/')" 
     />
 
     <redirect-button
       buttonText="Logout"
       buttonImageUrl="assets/icons/logoutIcon.svg"
-      buttonDescription="logout Icon"
+      buttonDescription="logoutIcon"
       (btnClicked)="logoutButtonClicked()" 
     />
 

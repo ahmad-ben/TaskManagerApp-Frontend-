@@ -17,7 +17,7 @@
       </h1>
 
       <button 
-        (click)="dropdownVisibilityToggle()" 
+        (click)="dropdownVisibilityToggle($event)" 
         type="button" 
         class="
           dropDownButton flex justify-center items-center rounded-md px-3 py-1.5 
@@ -26,13 +26,13 @@
         "
       >
         <img
-          [class.active]="dropdownVisibility" class="settingIcon"
+          [class.active]="!(menusStateService.tasksMenuState$ | async)" class="settingIcon"
           src="assets/icons/settingIcon.svg" alt="settingIcon"
         >
       </button>
 
       <div
-        [class.hidden]="!dropdownVisibility" 
+        [class.hidden]="!(menusStateService.tasksMenuState$ | async)" 
         class="
           dropDown z-10 bg-white divide-y divide-gray-100 w-36
           rounded-lg shadow absolute right-0 top-[calc(100%+5px)]
