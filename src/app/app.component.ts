@@ -44,7 +44,6 @@ export class AppComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   onKeyDown(event: MouseEvent) {
-    console.log("onKeyDown", event.target);
     this.menusStateService.closeAllMenus();
   }
 
