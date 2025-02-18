@@ -15,7 +15,8 @@ export class DeleteButtonComponent {
   
   @Output() btnClick = new EventEmitter();
 
-  deleteBtnClicked() {
+  deleteBtnClicked(event: MouseEvent) {
+    event.stopPropagation();
     this.btnClick.emit();
   }
 

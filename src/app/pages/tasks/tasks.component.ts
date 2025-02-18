@@ -50,7 +50,7 @@ export class TasksComponent{
     this.taskService.deleteAllTasks(this.listId)
     .pipe( finalize(() => {
       this.isLoading = false;
-      this.changeDropdownVisibility.emit(false);
+      this.menusStateService.closeAllMenus();
     }) )
     .subscribe({
       next: (res: any) => this.tasksArray = []
