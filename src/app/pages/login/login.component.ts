@@ -68,6 +68,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       .subscribe({
         next: (res: HttpResponse<any>) => {
           this.router.navigateByUrl('/homePage/lists');
+          this.toastr.clear();
           showSuccessToaster(this, "Login Success!", "Welcome.");
         },
         error: (error: ErrorBodyType) => {
