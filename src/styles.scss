@@ -83,7 +83,30 @@ button.invalidInputState{
   }
 }
 
-.ngx-toastr.toast-warning{
-  width: min(50%, 500px);
-  margin-left: auto;
+.class-test.toast-warning{
+  a {
+    display: inline-block; 
+    color: white; 
+    background-color: $green; 
+    text-decoration: none; 
+    font-weight: bold; 
+    padding: 8px 16px; 
+    border-radius: 4px; 
+    transition: background-color 0.3s, transform 0.2s; 
+
+    &:hover {
+      background-color: $light-green; 
+      transform: scale(1.05); 
+      text-decoration: none; 
+    }
+
+    &:active {
+      background-color: $dark-green; 
+      transform: scale(0.95); 
+    }
+  }
+}
+
+@media (min-width: 450px) {
+  .class-test.toast-warning{width: 450px;}
 }
